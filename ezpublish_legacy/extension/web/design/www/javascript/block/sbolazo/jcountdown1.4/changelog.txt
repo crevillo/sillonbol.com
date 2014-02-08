@@ -1,0 +1,13 @@
+
+Version 1.4:
+
+
+- On and Off event API now used from jQuery 1.7
+- Years and months now supported in countdown
+- Added yearsAndMonths option
+- htmlTemplate changed to accommodate years and months being added, and tokens have changed
+- originalContent renamed to originalHTML
+- servertime options can now be a function as well as a number
+- fixed bug: https://github.com/tomgrohl/jQuery-plugins/issues/7
+- fixed bug: https://github.com/tomgrohl/jQuery-plugins/issues/9
+

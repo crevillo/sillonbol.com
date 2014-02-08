@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<IniConfig>
+	<envs>
+		<env name="local" comment="Local"/>
+		<env name="prod" comment="Production"/>
+	</envs>
+    <files>
+		<file path="extension/web/settings/web.ini" comment="General">
+            <line env="local" block="SBSettings" type="numeric" name="ContactNode" value="6336" comment=""/>
+            <line env="prod" block="SBSettings" type="numeric" name="ContactNode" value="6310" comment=""/>
+
+            <line env="local" block="SBSettings" type="numeric" name="QuienesSomosNode" value="6335" comment=""/>
+            <line env="prod" block="SBSettings" type="numeric" name="QuienesSomosNode" value="6309" comment=""/>
+            <line env="local" block="SBSettings" type="numeric" name="VideosNode" value="2541" comment=""/>
+            <line env="prod" block="SBSettings" type="numeric" name="VideosNode" value="2541" comment=""/>
+
+            <line env="local" block="SBSettings" type="numeric" name="DebatesNode" value="456" comment=""/>
+            <line env="prod" block="SBSettings" type="numeric" name="DebatesNode" value="456" comment=""/>
+
+            <line env="local" block="SBSettings" type="numeric" name="LinksNode" value="375" comment=""/>
+            <line env="prod" block="SBSettings" type="numeric" name="LinksNode" value="375" comment=""/>
+
+            <line env="local" block="SBSettings" type="numeric" name="AvisoLegalNode" value="6350" comment=""/>
+            <line env="prod" block="SBSettings" type="numeric" name="AvisoLegalNode" value="6315" comment=""/>
+        </file>
+    </files>
+</IniConfig>

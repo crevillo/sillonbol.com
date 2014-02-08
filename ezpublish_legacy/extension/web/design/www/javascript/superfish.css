@@ -1,0 +1,47 @@
+.sf-menu ul {
+	position:		absolute;
+	width:			972px; /* left offset of submenus need to match (see below) */
+	background:  url(../images/bg-submenu.jpg) 0 0 repeat-x;
+	padding: 13px 9px 19px 10px;
+	z-index:99;
+}
+
+.sf-menu ul li {
+	float:left;
+	background:url(../images/marker-menu.gif) right 3px no-repeat;
+	padding-right:14px;
+	margin-right:4px;
+	margin-bottom:0px;
+	border:none;
+}
+.sf-menu ul li.last {background:none; padding-right:0; margin-right:0;}
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul {
+	left:			-10px;
+	top:			43px; /* match top ul list item height */
+	z-index:		99;
+}
+
+
+
+.sf-menu li:hover li a, 
+.sf-menu li.sfHover li a {
+	display:inline-block;
+	font-weight:normal;
+	text-transform:none;
+	color:#fff;
+	font-size:12px;
+	line-height:1.2em;
+	background:none;
+	border:none;
+	padding:0px 0 0px 9px;
+	text-align:left;
+
+}
+.sf-menu li:hover li a:hover, 
+.sf-menu li.sfHover li a:hover{text-decoration:underline;}
+
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	outline:		0;
+}

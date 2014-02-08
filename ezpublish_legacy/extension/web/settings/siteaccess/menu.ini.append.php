@@ -1,0 +1,5 @@
+<?php /*
+
+[MenuContentSettings]
+TopIdentifierList[]=subcategoria
+*/ ?>

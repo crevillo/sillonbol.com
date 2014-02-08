@@ -1,0 +1,34 @@
+#form-top a {behavior: url(js/PIE.htc); position:relative;}
+
+.sf-menu li.bgr {behavior: url(js/PIE.htc); position:relative;}
+.sf-menu li.bgr:hover {box-shadow:2px 1px 2px rgba(165,167,169,0.1); behavior: url(js/PIE.htc); position:relative;}
+.sf-menu li.bgr.sfHover {box-shadow:2px 1px 2px rgba(165,167,169,0.1); behavior: url(js/PIE.htc); position:relative;}
+.sf-menu li.current {box-shadow:2px 1px 2px rgba(165,167,169,0.1); behavior: url(js/PIE.htc); position:relative;}
+
+.button {behavior: url(js/PIE.htc); position:relative;}
+.button-1 {behavior: url(js/PIE.htc); position:relative;}
+.button-2 {behavior: url(js/PIE.htc); position:relative;}
+
+.bg-row {behavior: url(js/PIE.htc); position:relative;}
+.bg-aside {behavior: url(js/PIE.htc); position:relative;}
+
+.bg-dark {behavior: url(js/PIE.htc); position:relative;}
+.bg-white {behavior: url(js/PIE.htc); position:relative;}
+.bg-blue {behavior: url(js/PIE.htc); position:relative;}
+
+.list-1 li {behavior: url(js/PIE.htc); position:relative;}
+.list-3 li {behavior: url(js/PIE.htc); position:relative;}
+
+#page1 .tabs li:hover {behavior: url(js/PIE.htc); position:relative;}
+#page1 .tabs li.active {behavior: url(js/PIE.htc); position:relative;}
+
+#page2 .tabs-2 li:hover{behavior: url(js/PIE.htc); position:relative;}
+#page2 .tabs-2 li.active {behavior: url(js/PIE.htc); position:relative;}
+
+ div#thumbs {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader() !important;}
+
+
+
+
+
+
