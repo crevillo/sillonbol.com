@@ -1,0 +1,4 @@
+<?php /*
+[IndexOptions]
+OptimizeOnCommit=disabled
+*/ ?>

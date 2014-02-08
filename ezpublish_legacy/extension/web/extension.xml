@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+ <software>
+     <metadata>
+         <name>Sillonbol</name>
+         <version>1.0.0</version>
+         <copyright>Copyright text</copyright>
+         <license>GNU General Public License v2</license>
+         <info_url>http://sillonbol.com</info_url>
+     </metadata>
+ 
+     <dependencies>
+         <extends>
+             <extension name="ezoe" />
+         </extends>
+     </dependencies>
+ 
+ </software>
