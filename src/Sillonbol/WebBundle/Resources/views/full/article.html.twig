@@ -1,0 +1,54 @@
+{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+{% set title %}{{ content.contentInfo.name ~ '- Sillonbol.com' }}{% endset %}
+{% set description %}
+{{ ez_render_field( content, 'body' )|striptags[:155] }}...{% endset %}
+{% set keywords %}
+{{ ez_render_field( content, 'tags' )|striptags|trim }}{% endset %}
+{% block content %}
+<div class="col-md-11 single">
+    <div class="col-md-11 single-in">
+       {{ ez_render_field(
+                    content,
+                    'image',
+                    {
+                        'template': 'SillonbolWebBundle:fields:ezimage_simple.html.twig',
+                        'parameters': {'alias': 'gallery'}
+                    }
+                ) }}	   
+        <div class="sing-tit-cont">
+            <p class="cat"><a href="{{ path( category ) }}" title="Ver todos los post de {{ category.contentInfo.name }}" rel="category">{{ category.contentInfo.name }}</a></p>
+            <h3 class="sing-tit">{{ ez_render_field( content, 'title' ) }}</h3>
+            <p class="meta">
+                <i class="fa fa-clock-o"></i> {{ location.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale, null, "d MMM Y" ) }}
+            </p>
+            {% if not ez_is_field_empty( content, 'autor' ) %}
+            <p class="meta">
+                <i class="fa fa-pencil"></i> {{ ez_render_field( content, 'autor' ) }}
+            </p>
+            {% endif %}
+        </div>
+
+        <div class="sing-cont">
+            <div class="sing-spacer">
+                {% if not ez_is_field_empty( content, 'body' ) %}
+                <div class="attribute-long">
+                    {{ ez_render_field( content, 'body' ) }}
+                </div>
+                {% endif %}
+                {% if not ez_is_field_empty( content, 'tags' ) %}
+                {{ ez_render_field( content, 'tags' ) }}
+                {% endif %}
+                <hr /> 
+                <div id="comments">
+                    {{ ez_comments_render_content( content.contentInfo ) }}
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">stLight.options({publisher: "c4240200-4feb-4b25-abd9-23abab886e78", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<script>
+var options={ "publisher": "c4240200-4feb-4b25-abd9-23abab886e78", "position": "left", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "googleplus", "sharethis"]}};
+var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
+</script>
+{% endblock %}

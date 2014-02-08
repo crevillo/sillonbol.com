@@ -1,0 +1,16 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#socialmenu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        {% block logo %}
+            {% include 'SillonbolWebBundle::page_header_logo.html.twig' %}
+        {% endblock %}
+    </div>
+    {% block socialmenu %}
+        {{ render( controller( 'SillonbolWebBundle:Web:socialLinks' ) ) }}
+    {% endblock %}
+    <!--/.nav-collapse -->
+</div>

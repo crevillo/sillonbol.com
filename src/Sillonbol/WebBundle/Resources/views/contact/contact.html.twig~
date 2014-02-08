@@ -1,0 +1,16 @@
+{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+{% set title %}{{ 'Contacto - Sillonbol.com' }}{% endset %}
+
+{% block content %}
+<div class="col-md-11 single">
+    <div class="col-md-11 single-in">
+        <div id="contact-form">
+            <h3>Formulario de contacto</h3>
+            
+            <p>Déjanos tu mensaje y nos pondremos contigo en cuanto podamos. ¡Gracias!</p>
+            
+            {{ form(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

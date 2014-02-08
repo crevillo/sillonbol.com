@@ -1,0 +1,13 @@
+{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+{% set title %}Sillonbol.com{% endset %}
+{% block content %}
+<div class="col-md-9 cont-grid">
+    <div class="grid">
+        {{ render( controller( 'SillonbolWebBundle:Frontpage:secondaryBlock' ) ) }}
+    </div>
+</div>
+<div class="col-md-3 sidebar">
+    {{ render( controller( 'SillonbolWebBundle:Frontpage:commentsBlock' ) ) }}
+    {{ render( controller( 'SillonbolWebBundle:Frontpage:tagsBlock' ) ) }}
+ </div>
+{% endblock %}

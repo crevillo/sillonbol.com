@@ -1,0 +1,8 @@
+<div id="recent-comments-2" class="widget widget_recent_comments">
+    <h3>Últimos comentarios</h3>
+    <ul id="recentcomments">
+{% for comment in comments.result %}
+        <li class="recentcomments">{{ comment.autor }} en <a href="{{ comment.article_link }}#post-{{ comment.id }}">{{ comment.article_title }}</a></li>
+{% endfor %}
+    </ul>
+</div>

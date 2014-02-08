@@ -1,0 +1,20 @@
+{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+
+{% block content %}
+<div class="col-md-11 single">
+    <div class="col-md-11 single-in">
+        <div id="contact-form">
+            {% set messages = app.session.flashbag.get('success') %}
+            {% if messages|length > 0 %}
+            <div class="flash-notice">
+            {% for flashMessage in messages %}
+                
+                <p> {{ flashMessage }}</p>
+               
+            {% endfor %}
+              </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

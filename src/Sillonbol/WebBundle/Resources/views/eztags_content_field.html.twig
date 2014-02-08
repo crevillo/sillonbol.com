@@ -1,0 +1,10 @@
+{% block eztags_field %}
+<p><span class="tag-post">
+        <i class="fa fa-tag"></i>
+{% spaceless %}
+    {% for tag in field.value.tags %}
+        <a href="{{ path( 'ez_legacy', { 'module_uri': '/tags/view/' ~ tag.keyword|url_encode } ) }}">{{ tag.keyword }}</a>{% if not loop.last %}, {% endif %}
+    {% endfor %}
+{% endspaceless %}
+</span></p>
+{% endblock %}

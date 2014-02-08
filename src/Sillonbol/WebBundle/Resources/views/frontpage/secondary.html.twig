@@ -1,0 +1,6 @@
+{# empty Twig template #}
+{% for contentId, location in locationList %}
+    <div class="item">
+        {{ render_esi( controller( 'ez_content:viewLocation', {'locationId': location.contentInfo.mainLocationId, 'viewType': 'line'} ) ) }}
+    </div>
+{% endfor %}

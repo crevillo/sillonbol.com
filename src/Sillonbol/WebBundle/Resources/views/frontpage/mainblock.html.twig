@@ -1,0 +1,7 @@
+<div class="row featured">
+    {% for contentId, location in locationList %}
+    <div class="col-sm-4 col-md-4 item-featured">
+        {{ render_esi( controller( 'ez_content:viewLocation', {'locationId': location.contentInfo.mainLocationId, 'viewType': 'featured'} ) ) }}
+    </div>
+    {% endfor %}
+</div>
