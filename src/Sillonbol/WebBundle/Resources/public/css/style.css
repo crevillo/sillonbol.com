@@ -279,7 +279,7 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.
     #mainmenu .nav > li > a {padding: 15px 6px}
 }
 @media (max-width: 900px){
-    #mainmenu .nav > li > a {padding: 10px 3px}
+    #mainmenu .nav > li > a {padding: 15px 3px}
     .navbar{text-transform:none}
 }
 
