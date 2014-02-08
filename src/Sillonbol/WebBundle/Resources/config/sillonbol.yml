@@ -41,8 +41,8 @@ system:
             featured:
                 reference: null
                 filters:
-                    - { name: geometry/scalewidthdownonly, params: [640] }
-                    - { name: geometry/crop, params: [400, 400, 0, 0] }
+                    - { name: geometry/scalewidthdownonly, params: [1200] }
+                    - { name: geometry/crop, params: [1200, 600, 0, 0] }
             line:
                 reference: null
                 filters:
