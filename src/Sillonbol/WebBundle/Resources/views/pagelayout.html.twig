@@ -19,12 +19,12 @@
         {% include 'SillonbolWebBundle::page_header.html.twig' %}
     {% endblock %}
     {% if app.request.attributes.get( 'locationId' ) == 2 %}
-        {{ render( controller( 'SillonbolWebBundle:Frontpage:mainBlock' ) ) }}
+        {{ render_esi( controller( 'SillonbolWebBundle:Frontpage:mainBlock' ) ) }}
     {% else %}
     <div class="row spacer"></div>
     {% endif %}
-    {% block menu %}
-        {{ render( controller( 'SillonbolWebBundle:Web:mainMenu', { 'selected': ezpublish.legacy.get( 'path' ).1 is defined ? ezpublish.legacy.get( 'path' ).1.node_id : 0 } ) ) }}
+    {% block socialandsearch %}
+       {% include 'SillonbolWebBundle::page_secondary_header.html.twig' %}
     {% endblock %}
     {% block content %}{% endblock %}
     {% block footer %}

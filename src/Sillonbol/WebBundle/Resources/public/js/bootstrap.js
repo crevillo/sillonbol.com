@@ -627,6 +627,7 @@ if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery"
 
   $.fn.collapse = function (option) {
     return this.each(function () {
+console.log( 'bu' );
       var $this   = $(this)
       var data    = $this.data('bs.collapse')
       var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
@@ -666,7 +667,6 @@ if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery"
       if ($parent) $parent.find('[data-toggle=collapse][data-parent="' + parent + '"]').not($this).addClass('collapsed')
       $this[$target.hasClass('in') ? 'addClass' : 'removeClass']('collapsed')
     }
-
     $target.collapse(option)
   })
 
