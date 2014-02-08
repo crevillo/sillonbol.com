@@ -276,10 +276,11 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.
 	
 }
 @media (max-width: 1024px){
-    .nav > li > a {padding: 15px 6px}
+    #mainmenu .nav > li > a {padding: 15px 6px}
 }
 @media (max-width: 900px){
-    .nav > li > a {padding: 15px 3px}
+    #mainmenu .nav > li > a {padding: 15px 3px}
+    .navbar{text-transform:none}
 }
 
 
@@ -289,8 +290,6 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.
 	.navbar-form {border:none}
 	.sing-tit-cont{margin-left:5%; width:90%;}
 	.sing-cont{margin-left:5%;width:90%;}
-        .nav > li > a {padding: 15px 1px}
-        
 	
 	.navbar-toggle {border:none}
 	.navbar-toggle:hover {background:#fff!important}
