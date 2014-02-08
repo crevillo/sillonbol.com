@@ -261,10 +261,10 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.
 }
 
 .recentcomments a, #tag-cloud a{display:inline !important;padding:0 !important;margin:0 !important;}
-
+.content-view-embeddedmedia img{width:100%; height:auto}
 @media (max-width: 1000px) { 
 	
-.cont-grid, .sidebar{width:100%;}	
+.cont-grid, .sidebar{width:100%; }	
 .single{float:left; width:100%;border-left: none;}
 
 
