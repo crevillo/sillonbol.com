@@ -1,0 +1,51 @@
+#?ini charset="utf-8"?
+
+[Base]
+# Your site's shortname
+# Can be found on http://docs.disqus.com/developers/universal/ when you're logged in
+DisqusShortname=sillonbolcom
+
+# Put this setting to enabled to tell the Disqus service
+# that you are testing the system on an inaccessible website,
+# e.g. secured staging server or a local environment
+DevelopmentMode=enabled
+
+[Threads]
+# Number of items to display
+items=5
+
+[Commenters]
+# items: Number of items to display
+# hide_mods: Show/hide moderators (valid values are 0 or 1)
+# hide_avatars: Show/hide avatars (valid values are 0 or 1)
+# avatar_size: valid values are 24, 32, 48, 92, 128
+items=5
+hide_mods=0
+hide_avatars=0
+avatar_size=24
+
+[Comments]
+# items: Number of items to display
+# hide_avatars: Show/hide avatars (valid values are 0 or 1)
+# avatar_size: valid values are 24, 32, 48, 92, 128
+# excerpt_length: comment excerpt length
+items=5
+hide_avatars=0
+avatar_size=24
+excerpt_length=200
+
+[ExportSettings]
+# Export max file size, in bytes
+# If export file exceeds this value, it will be splitted into several
+ExportMaxSize=52428800
+
+# Exporter classes
+# Key is the identifier (used in the export script as --exporter option)
+# Value is the exporter class FQN
+# All exporters must implement Disqus\Export\ExporterInterface interface
+Exporters[]
+Exporters[ezcomments]=Disqus\Export\Exporter\EzComments
+Exporters[sbcomments]=Disqus\Export\Exporter\SbComments
+
+Formatters[]
+Formatters[disquswxr]=Disqus\Export\Formatter\DisqusWXR

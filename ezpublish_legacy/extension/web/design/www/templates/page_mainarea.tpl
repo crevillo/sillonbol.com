@@ -1,0 +1,5 @@
+
+         
+          {$module_result.content}
+                                           
+

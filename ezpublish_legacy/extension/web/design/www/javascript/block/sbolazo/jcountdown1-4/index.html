@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>Date Countdown jQuery Plugin</title>
+<script src="script/jquery-1.7.js" type="text/javascript"></script>
+<script src="script/jquery.jcountdown1.4.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript">
+$(document).ready(function() {
+
+			
+	$("#time").countdown({
+		date: "december 11, 2011 19:23",
+		onComplete: function( event ){
+			//$("#time").removeData('jcdData');
+			$("#time").countdown({
+				date: "december 12, 2012 16:09",
+				onComplete: function( event ) {
+
+					$(this).html("Completed");
+				},
+				leadingZero: true
+			});
+		},
+		leadingZero: true
+	});
+	
+	$("#time2").countdown({
+		htmlTemplate: "%y <span class='cd-time'>years</span> %m <span class='cd-time'>months</span> %d <span class='cd-time'>days</span> %h <span class='cd-time'>hours</span> %i <span class='cd-time'>mins</span> %s <span class='cd-time'>sec</span>",
+		date: "december 19, 2012 16:00:00",
+		yearsAndMonths: true,
+		servertime: function() { 
+		    var time = null; 
+		    $.ajax({url: 'get_time.php', 
+		        async: false, 
+				dataType: 'text', 
+		        success: function( data, status, xhr ) {  
+					time = data; 
+		        }, 
+				error: function(xhr, status, err) { 
+		            time = new Date(); 
+					time = time.getTime();
+		    	}
+			});
+		    return time; 
+		},
+		hoursOnly: false,
+		onComplete: function( event ) {
+		
+			$(this).html("Completed");
+		},
+		onPause: function( event, timer ) {
+
+			$(this).html("Pause");
+		},
+		onResume: function( event ) {
+		
+			$(this).html("Resumed");
+		},
+		leadingZero: true
+	});
+	
+	//$("#time2").countdown('pause');
+	//$("#time2").countdown('resume');
+
+});
+</script>
+</head>
+<body>
+	<div id="container">
+		<h1>Date Countdown jQuery Plugin</h1><br />
+
+		<p id="time" class="time"></p>
+		
+		<p id="time2" class="time"></p>
+	
+	</div>
+</body>
+</html>
