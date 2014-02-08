@@ -23,8 +23,8 @@
     {% else %}
     <div class="row spacer"></div>
     {% endif %}
-    {% block menu %}
-        {{ render( controller( 'SillonbolWebBundle:Web:mainMenu', { 'selected': ezpublish.legacy.get( 'path' ).1 is defined ? ezpublish.legacy.get( 'path' ).1.node_id : 0 } ) ) }}
+    {% block socialandsearch %}
+       
     {% endblock %}
     {% block content %}{% endblock %}
     {% block footer %}
