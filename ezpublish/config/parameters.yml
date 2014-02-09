@@ -1,0 +1,5 @@
+# This file is auto-generated during the composer install
+parameters:
+    secret: sillonbol
+    locale_fallback: es
+    ezpublish_legacy.default.view_default_layout: 'SillonbolWebBundle::pagelayout.html.twig'
