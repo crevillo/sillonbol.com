@@ -1,0 +1,8 @@
+system:
+    sillonbol:
+        database:
+            type: mysql
+            user: '***********'
+            password: '***********'
+            server: '***********'
+            database_name: '***********'

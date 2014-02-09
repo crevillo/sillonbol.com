@@ -1,5 +1,28 @@
+http_cache:
+    purge_type: multiple_http
+siteaccess:
+    default_siteaccess: www
+    list:
+        - www
+        - administrador
+    groups:
+        sillonbol:
+            - www
+            - administrador
+    match:
+        URIElement: '1'
 system:
+    sillonbol:
+        languages:
+            - esl-ES
+        var_dir: var/ezflow_site
+        http_cache:
+            purge_servers: [http://local.sillonbol:6081]
     www:
+        content:
+            view_cache: true
+            ttl_cache: true
+            default_ttl: 14400
         location_view:
             featured:
                 article:
@@ -37,6 +60,10 @@ system:
                     controller: "SillonbolWebBundle:Web:categoryList"
                     match:
                         Identifier\ContentType: [subcategoria]
+        fieldtypes:
+            ezxml:
+                custom_tags:
+                    - { path: %kernel.root_dir%/../src/Sillonbol/WebBundle/Resources/custom_tags.xsl, priority: 10 }
         image_variations:
             big:
                 reference: null
