@@ -17,7 +17,7 @@ system:
             - esl-ES
         var_dir: var/ezflow_site
         http_cache:
-            purge_servers: [http://local.sillonbol:6081]
+            purge_servers: [http://www.sillonbol.com]
     www:
         content:
             view_cache: true
