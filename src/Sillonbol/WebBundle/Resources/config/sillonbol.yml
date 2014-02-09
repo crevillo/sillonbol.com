@@ -38,6 +38,11 @@ system:
                     match:
                         Identifier\ContentType: [subcategoria]
         image_variations:
+            big:
+                reference: null
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [1200] }
+                    - { name: geometry/crop, params: [1200, 600, 0, 0] }
             featured:
                 reference: null
                 filters:
