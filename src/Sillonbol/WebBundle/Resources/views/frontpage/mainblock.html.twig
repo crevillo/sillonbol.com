@@ -1,6 +1,6 @@
 <div class="row featured">
     {% for contentId, location in locationList %}
-    <div class="col-sm-{{ loop.first ? '12' : '6' }} col-md-{{ loop.first ? '12' : '6' }} item-featured">
+    <div class="col-sm-{{ loop.first ? '8' : '4' }} col-md-{{ loop.first ? '8' : '4' }} item-featured">
         {{ render_esi( controller( 'ez_content:viewLocation', {'locationId': location.contentInfo.mainLocationId, 'viewType': 'featured'} ) ) }}
     </div>
     {% endfor %}
