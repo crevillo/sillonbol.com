@@ -7,6 +7,16 @@
 {% block content %}
 <div class="col-md-11 single">
     <div class="col-md-11 single-in">
+       {% if not ez_is_field_empty( content, 'imagen_articulo' ) %}
+        {{ ez_render_field(
+                    content,
+                    'imagen_articulo',
+                    {
+                        'template': 'SillonbolWebBundle:fields:ezimage_simple.html.twig',
+                        'parameters': {'alias': 'big'}
+                    }
+                ) }}
+       {% else %}
        {{ ez_render_field(
                     content,
                     'image',
@@ -14,7 +24,8 @@
                         'template': 'SillonbolWebBundle:fields:ezimage_simple.html.twig',
                         'parameters': {'alias': 'big'}
                     }
-                ) }}	   
+                ) }}
+        {% endif %}
         <div class="sing-tit-cont">
             <p class="cat"><a href="{{ path( category ) }}" title="Ver todos los post de {{ category.contentInfo.name }}" rel="category">{{ category.contentInfo.name }}</a></p>
             <h3 class="sing-tit">{{ ez_render_field( content, 'title' ) }}</h3>
