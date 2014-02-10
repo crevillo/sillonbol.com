@@ -65,7 +65,7 @@ class FrontpageController extends Controller
 
         // Retrieve latest content through the ContentHelper.
         // We only want articles that are located somewhere in the tree under root location.
-        $latestContent = $this->get( 'sillonbol.content_helper' )->getLatestContent( 3 );
+        $latestContent = $this->get( 'sillonbol.content_helper' )->getLatestContent( 3, 4 );
 
         $locationList = array();
         // Looping against search results to build $locationList
