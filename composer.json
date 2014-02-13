@@ -48,9 +48,13 @@
         "zetacomponents/signal-slot": "@dev",
         "zetacomponents/system-information": "@dev",
         "hautelook/templated-uri-bundle": "~1.0",
+<<<<<<< HEAD
         "doctrine/doctrine-bundle": "1.2.*",
         "netgen/tagsbundle": "1.0",
         "genemu/form-bundle": "2.2.*"
+=======
+        "doctrine/doctrine-bundle": "1.2.*"
+>>>>>>> 59b5a9d... EZP-22279: Added DoctrineBundle dependency
     },
     "conflict": {
         "symfony/symfony": "2.3.9"

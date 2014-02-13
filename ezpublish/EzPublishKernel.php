@@ -36,7 +36,6 @@ use Netgen\TagsBundle\NetgenTagsBundle;
 use Genemu\Bundle\FormBundle\GenemuFormBundle;
 use Sillonbol\WebBundle\SillonbolWebBundle;
 
-
 class EzPublishKernel extends Kernel
 {
     /**
