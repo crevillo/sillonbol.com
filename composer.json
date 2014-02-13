@@ -48,6 +48,7 @@
         "zetacomponents/signal-slot": "@dev",
         "zetacomponents/system-information": "@dev",
         "hautelook/templated-uri-bundle": "~1.0",
+        "doctrine/doctrine-bundle": "1.2.*",
         "netgen/tagsbundle": "1.0",
         "genemu/form-bundle": "2.2.*"
     },

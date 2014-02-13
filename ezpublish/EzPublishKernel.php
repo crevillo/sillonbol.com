@@ -31,9 +31,11 @@ use Tedivm\StashBundle\TedivmStashBundle;
 use WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle;
 use Nelmio\CorsBundle\NelmioCorsBundle;
 use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Netgen\TagsBundle\NetgenTagsBundle;
 use Genemu\Bundle\FormBundle\GenemuFormBundle;
 use Sillonbol\WebBundle\SillonbolWebBundle;
+
 
 class EzPublishKernel extends Kernel
 {
@@ -53,6 +55,7 @@ class EzPublishKernel extends Kernel
             new MonologBundle(),
             new SwiftmailerBundle(),
             new AsseticBundle(),
+            new DoctrineBundle(),
             new TedivmStashBundle(),
             new HautelookTemplatedUriBundle(),
             new EzPublishCoreBundle(),
