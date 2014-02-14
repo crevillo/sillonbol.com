@@ -13,3 +13,7 @@ contact_process:
 rss:
     path: rss
     defaults: { _controller: SillonbolWebBundle:Feed:index, _format: rss }
+
+search:
+    path: /content/search
+    defaults: {_controller: SillonbolWebBundle:Search:index }
