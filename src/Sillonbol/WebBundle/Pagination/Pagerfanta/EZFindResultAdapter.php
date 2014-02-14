@@ -86,7 +86,7 @@ class eZFindResultAdapter implements AdapterInterface
             'sort' => $sort,
             'as_objects' => false,
             'offset' => $offset,
-            'limit' => $limit
+            'limit' => $length
         );
 
         $searchResults = $this->doSearch( $searchParams );
