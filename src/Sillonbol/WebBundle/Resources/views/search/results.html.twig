@@ -16,6 +16,7 @@
     <div class="row spacer"></div>
     {% if pagerBlog|length() > 0 %}
         <div class="col-md-11 single-in">
+            <h4>Se han encontrado {{ pagerBlog.nbResults }} resultados para "{{ searchPhrase }}"</h4>
             <div class="grid">
                 {% for post in pagerBlog %}
                         <div class="item">
@@ -28,6 +29,10 @@
         {% if pagerBlog.haveToPaginate() %}
             {{ pagerfanta( pagerBlog, 'twitter_bootstrap_translated' ) }}
         {% endif %}
+    {% else %}
+        <div class="col-md-11 single-in">
+            <p>No se han encontrado resultados para "{{ searchPhrase }}"</p>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

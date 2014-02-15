@@ -45,7 +45,7 @@ class SearchController extends Controller
             'SillonbolWebBundle:search:results.html.twig',
             array(
                 'pagerBlog' => $pager,
-                'searchPhrase' => $searchText
+                'searchPhrase' => $searchText,
             ),
             $response
         );
