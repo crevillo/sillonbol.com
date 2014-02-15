@@ -112,14 +112,24 @@ class WebController extends Controller
         $path_array = explode( '/', $location->pathString );
         $category = $this->getRepository()->getLocationService()->loadLocation( $path_array[3] );
 
+        // set some template variables depending on the viewType
+        $twigVars = array( 'category' => $category );
+
+        if( $viewType == 'rss' )
+        {
+            $twigVars['published_rcf822'] = $location->getContentInfo()->publishedDate->format(\DateTime::RFC822);
+        }
+
+        if( $viewType == 'search' )
+        {
+            $twigVars['highlight'] = $params['highlight'];
+        }
+
         return $this->get('ez_content')->viewLocation(
-             $locationId,
-             $viewType,
-             $layout,
-             array(
-                'category' => $category,
-                'published_rcf822' => $location->getContentInfo()->publishedDate->format(\DateTime::RFC822)
-             )
+            $locationId,
+            $viewType,
+            $layout,
+            $twigVars
         );
     }
 
@@ -186,41 +196,4 @@ class WebController extends Controller
         );
     }
 
-    public function contactAction(Request $request)
-    {
-        $form = $this->createForm(new ContactType());
-
-        if ( $request->isMethod('POST') ) 
-        {
-            $form->bind($request);
-
-            if ($form->isValid()) 
-            {
-                $message = \Swift_Message::newInstance()
-                    ->setSubject($form->get('subject')->getData())
-                    ->setFrom($form->get('email')->getData())
-                    ->setTo('contact@example.com')
-                    ->setBody(
-                        $this->renderView(
-                            'LCWebsiteBundle:Mail:contact.html.twig',
-                            array(
-                                'ip' => $request->getClientIp(),
-                                'name' => $form->get('name')->getData(),
-                                'message' => $form->get('message')->getData()
-                            )
-                        )
-                    );
-
-                $this->get('mailer')->send($message);
-
-                $request->getSession()->getFlashBag()->add('success', 'Your email has been sent! Thanks!');
-
-                return $this->redirect($this->generateUrl('contact'));
-            }
-        }
-
-        return array(
-            'form' => $form->createView()
-        );
-    }
 }

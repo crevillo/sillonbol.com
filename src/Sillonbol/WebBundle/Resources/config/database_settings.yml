@@ -2,7 +2,7 @@ system:
     sillonbol:
         database:
             type: mysql
-            user: '***********'
-            password: '***********'
-            server: '***********'
-            database_name: '***********'
+            user: wwwuser
+            password: 'dCdzd2UyEZUyzueu'
+            server: localhost
+            database_name: dbweb
