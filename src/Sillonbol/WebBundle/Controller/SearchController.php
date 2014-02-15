@@ -25,7 +25,7 @@ class SearchController extends Controller
         $response = new Response();
 
         // Setting default cache configuration (you can override it in you siteaccess config)
-        $response->setSharedMaxAge( $this->getConfigResolver()->getParameter( 'content.default_ttl' ) );
+        $response->setSharedMaxAge( 0 );
 
         $request = $this->getRequest();
         $searchText = $request->get( 'SearchText' );
