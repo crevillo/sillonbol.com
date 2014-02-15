@@ -2,26 +2,20 @@
 
 {% block content %}
 <div class="col-md-11 cont-grid">
-    <div class="col-md-11 single-in">
-    <div class="grid">
-    
-                    {% if pagerBlog|length() > 0 %}
-                       
-                            {% for post in pagerBlog %}
-                                <div class="item">
-                                    {{ post.name }}
-                                </div>
-                            {% endfor %}
-
-     </div>
-    </div>
-                        {# Pagination is displayed only if needed (number of posts > limit) #}
-                        {% if pagerBlog.haveToPaginate() %}
-                            {{ pagerfanta( pagerBlog, 'twitter_bootstrap_translated' ) }}
-                        {% endif %}
-
-                    {% endif %}
-                
+    {% if pagerBlog|length() > 0 %}
+        <div class="col-md-11 single-in">
+            <div class="grid">
+                {% for post in pagerBlog %}
+                        <div class="item">
+                            {{ render_esi( controller( 'ez_content:viewLocation', {'locationId': post.location.contentInfo.mainLocationId, 'viewType': 'search', 'layout' : false , 'params': { 'highlight': post.highlight } } ) ) }}
+                        </div>
+                    {% endfor %}
+            </div>
+        </div>
+        {# Pagination is displayed only if needed (number of posts > limit) #}
+        {% if pagerBlog.haveToPaginate() %}
+            {{ pagerfanta( pagerBlog, 'twitter_bootstrap_translated' ) }}
+        {% endif %}
+    {% endif %}
 </div>
-
 {% endblock %}

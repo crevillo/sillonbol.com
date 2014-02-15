@@ -1,0 +1,23 @@
+<div class="grid-spacer">
+    <p class="grid-cat"><a href="{{ path( location ) }}">{{ ez_render_field( content, 'short_title' ) }}</a></p> 
+    <h2 class="grid-tit"><a href="{{ path( location )}}">{{ ez_render_field( content, 'title' ) }}</a></h2>
+    <p class="meta"> <i class="fa fa-clock-o"></i> {{ location.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale, null, "d MMM Y" ) }}</p>
+    {% if not ez_is_field_empty( content, 'image' ) %}
+    <a href="{{ path( location )}}">
+        {{ ez_render_field(
+                    content,
+                    'image',
+                    {
+                        'template': 'SillonbolWebBundle:fields:ezimage_simple.html.twig',
+                        'parameters': {'alias': 'line'}
+                    }
+                ) }}
+    </a>
+    {% endif %}
+    <div class="grid-text">
+        <p>{{ highlight|raw }}...</p>
+    </div>
+     {% if not ez_is_field_empty( content, 'tags' ) %}
+                {{ ez_render_field( content, 'tags' ) }}
+     {% endif %}
+</div>
