@@ -54,4 +54,3 @@ class SillonbolSearchAdapter extends SillonbolSearchHitAdapter
         return $list;
     }
 }
-
