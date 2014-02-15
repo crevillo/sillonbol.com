@@ -1,8 +1,0 @@
-system:
-    sillonbol:
-        database:
-            type: mysql
-            user: wwwuser
-            password: 'dCdzd2UyEZUyzueu'
-            server: localhost
-            database_name: dbweb
