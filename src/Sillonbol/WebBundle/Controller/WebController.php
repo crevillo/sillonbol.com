@@ -10,12 +10,12 @@ namespace Sillonbol\WebBundle\Controller;
 
 use eZ\Bundle\EzPublishCoreBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use Pagerfanta\Pagerfanta;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
 
 class WebController extends Controller
 {
@@ -155,6 +155,11 @@ class WebController extends Controller
         // Getting location and content from ezpublish dedicated services
         $repository = $this->getRepository();
         $location = $repository->getLocationService()->loadLocation( $locationId );
+        if ( $location->invisible )
+        {
+            throw new NotFoundHttpException( "Location #$locationId cannot be displayed as it is flagged as invisible." );
+        }
+
         $content = $repository
             ->getContentService()
             ->loadContentByContentInfo( $location->getContentInfo() );
