@@ -19,11 +19,11 @@ use eZ\Publish\API\Repository\Values\ValueObject;
 abstract class SillonbolLocationHighlighted extends ValueObject 
 {
     /**
-     * Returns the content info of the content object of this location
+     * Returns the content associated with this new object
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Location
+     * @return \eZ\Publish\API\Repository\Values\Content\Content
      */
-    abstract public function getLocation();
+    abstract public function getContent();
 
     /**
      * The highlighted text

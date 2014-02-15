@@ -12,14 +12,14 @@ use Sillonbol\WebBundle\API\Repository\Values\Content\SillonbolLocationHighlight
 class SillonbolLocationHighlighted extends APISillonbolLocationHighlighted 
 {
     /**
-     * Location associated to our new object
+     * Content associated to our new object
      *
-     * @var \eZ\Publish\API\Repository\Values\Content\Location
+     * @var \eZ\Publish\API\Repository\Values\Content\Content
      */
-    protected $location;
+    protected $content;
 
-    public function getLocation()
+    public function getContent()
     {
-        return $this->location;
+        return $this->content;
     }
 }

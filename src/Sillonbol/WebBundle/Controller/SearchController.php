@@ -34,7 +34,7 @@ class SearchController extends Controller
             new SillonbolSearchAdapter(
                 $this->getLegacyKernel(),
                 $request->get( 'SearchText' ),
-                $this->getRepository()->getLocationService()
+                $this->getRepository()->getContentService()
             )
         );
         $pager->setMaxPerPage( $this->container->getParameter( 'sillonbol.category.category_list.limit' ) );

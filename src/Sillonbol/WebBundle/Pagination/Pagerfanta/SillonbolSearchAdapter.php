@@ -7,7 +7,7 @@
 
 namespace Sillonbol\WebBundle\Pagination\Pagerfanta;
 
-use eZ\Publish\Core\Repository\LocationService;
+use eZ\Publish\Core\Repository\ContentService;
 use eZ\Publish\Core\MVC\Legacy\Kernel;
 use Sillonbol\WebBundle\Pagination\Pagerfanta\SillonbolSearchHitAdapter;
 use Sillonbol\WebBundle\Core\Repository\Values\Content\SillonbolLocationHighlighted;
@@ -19,14 +19,14 @@ use Sillonbol\WebBundle\Core\Repository\Values\Content\SillonbolLocationHighligh
 class SillonbolSearchAdapter extends SillonbolSearchHitAdapter
 {
     /**
-     * @var eZ\Publish\Core\Repository\LocationService
+     * @var eZ\Publish\Core\Repository\ContentService
      */
-    protected $locationService;
+    protected $contentService;
 
-    public function __construct( Kernel $legacyKernel, $searchTerm, LocationService $locationService )
+    public function __construct( Kernel $legacyKernel, $searchTerm, ContentService $contentService )
     {
         parent::__construct( $legacyKernel, $searchTerm );
-        $this->locationService = $locationService;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -42,10 +42,10 @@ class SillonbolSearchAdapter extends SillonbolSearchHitAdapter
         $list = array();
         foreach ( parent::getSlice( $offset, $length ) as $hit )
         {
-            $location = $this->locationService->loadLocation( $hit['main_node_id'] );
+            $content = $this->contentService->loadContent( $hit['id'] );
             $list[] = new SillonbolLocationHighlighted(
                 array(
-                    'location' => $location,
+                    'content' => $content,
                     'highlight' => $hit['highlight']
                 )
             );
