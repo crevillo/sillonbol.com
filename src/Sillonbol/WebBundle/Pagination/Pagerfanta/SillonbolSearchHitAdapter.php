@@ -52,7 +52,8 @@ class SillonbolSearchHitAdapter implements AdapterInterface
         $this->defaultSearchParams = array(
             'query' => $this->searchTerm,
             'as_objects' => false,
-            'class_id' => array( 'article', 'blog_post' )
+            'class_id' => array( 'article', 'blog_post' ),
+            'fields_to_return' => array( 'id', 'highlight' )
         );
     }
 
@@ -96,6 +97,7 @@ class SillonbolSearchHitAdapter implements AdapterInterface
         );
 
         $searchResults = $this->doSearch( $searchParams );
+        print_r( $searchResults );
 
         if ( !isset( $this->nbResults ) )
         {
