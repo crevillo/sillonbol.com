@@ -16,7 +16,7 @@ use eZ\Publish\API\Repository\Values\ValueObject;
  * @property-read \eZ\Publish\API\Repository\Values\Content\Location $location calls getLocation()
  * @property-read string $highlighted_text The highlighted text associated with the location in a eZFind result
  */
-abstract class SillonbolLocationHighlighted extends ValueObject 
+abstract class SillonbolContentWithHighlight extends ValueObject 
 {
     /**
      * Returns the content associated with this new object

@@ -7,9 +7,9 @@
 
 namespace Sillonbol\WebBundle\Core\Repository\Values\Content;
 
-use Sillonbol\WebBundle\API\Repository\Values\Content\SillonbolLocationHighlighted as APISillonbolLocationHighlighted;
+use Sillonbol\WebBundle\API\Repository\Values\Content\SillonbolContentWithHighlight as APISillonbolContentWithHighlight;
 
-class SillonbolLocationHighlighted extends APISillonbolLocationHighlighted 
+class SillonbolContentWithHighlight extends APISillonbolContentWithHighlight 
 {
     /**
      * Content associated to our new object

@@ -10,7 +10,7 @@ namespace Sillonbol\WebBundle\Pagination\Pagerfanta;
 use eZ\Publish\Core\Repository\ContentService;
 use eZ\Publish\Core\MVC\Legacy\Kernel;
 use Sillonbol\WebBundle\Pagination\Pagerfanta\SillonbolSearchHitAdapter;
-use Sillonbol\WebBundle\Core\Repository\Values\Content\SillonbolLocationHighlighted;
+use Sillonbol\WebBundle\Core\Repository\Values\Content\SillonbolContentWithHighlight;
 
 /**
  * Pagerfanta adapter for eZ Publish content search.
@@ -43,7 +43,7 @@ class SillonbolSearchAdapter extends SillonbolSearchHitAdapter
         foreach ( parent::getSlice( $offset, $length ) as $hit )
         {
             $content = $this->contentService->loadContent( $hit['id'] );
-            $list[] = new SillonbolLocationHighlighted(
+            $list[] = new SillonbolContentWithHighlight(
                 array(
                     'content' => $content,
                     'highlight' => $hit['highlight']
