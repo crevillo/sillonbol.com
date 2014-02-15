@@ -97,7 +97,6 @@ class SillonbolSearchHitAdapter implements AdapterInterface
         );
 
         $searchResults = $this->doSearch( $searchParams );
-        print_r( $searchResults );
 
         if ( !isset( $this->nbResults ) )
         {
