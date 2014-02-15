@@ -19,7 +19,7 @@
             <h4>Se han encontrado {{ pagerBlog.nbResults }} resultados para "{{ searchPhrase }}"</h4>
             <div class="grid">
                 {% for post in pagerBlog %}
-                        <div class="item">
+                         <div class="item">
                             {{ render_esi( controller( 'ez_content:viewLocation', {'locationId': post.content.contentInfo.mainLocationId, 'viewType': 'search', 'layout' : false , 'params': { 'highlight': post.highlight } } ) ) }}
                         </div>
                     {% endfor %}

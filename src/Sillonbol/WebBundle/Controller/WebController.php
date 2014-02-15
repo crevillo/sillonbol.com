@@ -115,12 +115,12 @@ class WebController extends Controller
         // set some template variables depending on the viewType
         $twigVars = array( 'category' => $category );
 
-        if( $viewType == 'rss' )
+        if ( $viewType == 'rss' )
         {
             $twigVars['published_rcf822'] = $location->getContentInfo()->publishedDate->format(\DateTime::RFC822);
         }
 
-        if( $viewType == 'search' )
+        if ( ( $viewType == 'search' ) && !empty( $params['highlight'] ) )
         {
             $twigVars['highlight'] = $params['highlight'];
         }
