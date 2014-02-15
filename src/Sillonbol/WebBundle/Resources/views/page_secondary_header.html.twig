@@ -9,7 +9,7 @@
     <div id="submenu" class="collapse navbar-collapse">
         {{ render_esi( controller( 'SillonbolWebBundle:Web:socialLinks' ) ) }}
         <div class="col-sm-3 col-md-3 pull-right search-cont">
-            <form class="navbar-form" role="search" method="get" action="/content/search">
+            <form class="navbar-form" role="search" method="get" action="{{ path( 'search' ) }}">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Buscar" name="SearchText" id="srch-term">
                     <div class="input-group-btn">
