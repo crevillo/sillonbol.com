@@ -9,14 +9,14 @@ namespace Sillonbol\WebBundle\Pagination\Pagerfanta;
 
 use eZ\Publish\Core\Repository\LocationService;
 use eZ\Publish\Core\MVC\Legacy\Kernel;
-use Sillonbol\WebBundle\Pagination\Pagerfanta\EZFindResultHitAdapter;
+use Sillonbol\WebBundle\Pagination\Pagerfanta\SillonbolSearchHitAdapter;
 use Sillonbol\WebBundle\Core\Repository\Values\Content\SillonbolLocationHighlighted;
 
 /**
  * Pagerfanta adapter for eZ Publish content search.
- * Will return results as Content objects.
+ * Will return results as SillonbolLocationHighlighted objects.
  */
-class EZFindResultAdapter extends EZFindResultHitAdapter
+class SillonbolSearchAdapter extends SillonbolSearchHitAdapter
 {
     /**
      * @var eZ\Publish\Core\Repository\LocationService

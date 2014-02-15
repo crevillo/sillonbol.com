@@ -10,7 +10,7 @@ namespace Sillonbol\WebBundle\Controller;
 
 use eZ\Bundle\EzPublishCoreBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Sillonbol\WebBundle\Pagination\Pagerfanta\EZFindResultAdapter;
+use Sillonbol\WebBundle\Pagination\Pagerfanta\SillonbolSearchAdapter;
 use Pagerfanta\Pagerfanta;
 
 class SearchController extends Controller
@@ -31,9 +31,10 @@ class SearchController extends Controller
 
         // Initialize pagination.
         $pager = new Pagerfanta(
-            new EZFindResultAdapter(
+            new SillonbolSearchAdapter(
                 $this->getLegacyKernel(),
-                $request->get( 'SearchText' ) 
+                $request->get( 'SearchText' ),
+                $this->getRepository()->getLocationService()
             )
         );
         $pager->setMaxPerPage( $this->container->getParameter( 'sillonbol.category.category_list.limit' ) );

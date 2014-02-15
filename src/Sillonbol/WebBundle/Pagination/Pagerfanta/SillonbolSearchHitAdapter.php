@@ -17,7 +17,7 @@ use eZFunctionHandler;
  * Pagerfanta adapter for eZ Publish content search.
  * Will return results as SearchHit objects.
  */
-class eZFindResultHitAdapter implements AdapterInterface
+class SillonbolSearchHitAdapter implements AdapterInterface
 {
     /**
      * @var eZ\Publish\Core\MVC\Legacy\Kernel
@@ -34,10 +34,26 @@ class eZFindResultHitAdapter implements AdapterInterface
      */
     private $searchTerm;
 
+    /**
+     * @var array
+     */
+    private $defaultSearchParams;
+
+    /**
+     * Constructor
+     *
+     * @param \eZ\Publish\Core\MVC\Legacy\Kernel $legacyKernel
+     * @param string $searchTerm
+     */
     public function __construct( Kernel $legacyKernel, $searchTerm )
     {
         $this->legacyKernel = $legacyKernel;
         $this->searchTerm = $searchTerm;
+        $this->defaultSearchParams = array(
+            'query' => $this->searchTerm,
+            'as_objects' => false,
+            'class_id' => array( 'article', 'blog_post' )
+        );
     }
 
     /**
@@ -52,15 +68,7 @@ class eZFindResultHitAdapter implements AdapterInterface
             return $this->nbResults;
         }
 
-        $searchPhrase = $this->searchTerm;
-
-        $searchParams = array(
-            'query' => $searchPhrase,
-            'as_objects' => false,
-            'limit' => 0
-        );
-
-        $searchResults = $this->doSearch( $searchParams );
+        $searchResults = $this->doSearch( $this->defaultSearchParams + array( 'limit' => 0 ) );
 
         return $this->nbResults = $searchResults['SearchCount'];
     }
@@ -75,18 +83,16 @@ class eZFindResultHitAdapter implements AdapterInterface
      */
     public function getSlice( $offset, $length )
     {
-        $searchPhrase = $this->searchTerm;
         $sort = array(
             'score' => 'desc',
             'published' => 'desc',
         );
 
-        $searchParams = array(
-            'query' => $searchPhrase,
+        
+        $searchParams = $this->defaultSearchParams + array(
             'sort' => $sort,
-            'as_objects' => false,
             'offset' => $offset,
-            'limit' => $limit
+            'limit' => $length
         );
 
         $searchResults = $this->doSearch( $searchParams );
@@ -99,7 +105,13 @@ class eZFindResultHitAdapter implements AdapterInterface
         return $searchResults['SearchResult'];
     }
 
-    private function doSearch( $searchParams )
+    /**
+     * Executes the eZFind query via callback function
+     * 
+     * @param array $searchParams
+     * @return array eZFindResult
+     */
+    private function doSearch( array $searchParams )
     {
         return $this->legacyKernel->runCallback(
             function () use ( $searchParams )

@@ -112,14 +112,24 @@ class WebController extends Controller
         $path_array = explode( '/', $location->pathString );
         $category = $this->getRepository()->getLocationService()->loadLocation( $path_array[3] );
 
+        // set some template variables depending on the viewType
+        $twigVars = array( 'category' => $category );
+
+        if( $viewType == 'rss' )
+        {
+            $twigVars['published_rcf822'] = $location->getContentInfo()->publishedDate->format(\DateTime::RFC822);
+        }
+
+        if( $viewType == 'search' )
+        {
+            $twigVars['highlight'] = $params['highlight'];
+        }
+
         return $this->get('ez_content')->viewLocation(
-             $locationId,
-             $viewType,
-             $layout,
-             array(
-                'category' => $category,
-                'published_rcf822' => $location->getContentInfo()->publishedDate->format(\DateTime::RFC822)
-             )
+            $locationId,
+            $viewType,
+            $layout,
+            $twigVars
         );
     }
 
