@@ -24,6 +24,12 @@ system:
             ttl_cache: true
             default_ttl: 14400
         location_view:
+            search:
+                article:
+                    controller: "SillonbolWebBundle:Web:showArticle"
+                    template: "SillonbolWebBundle:search:article.html.twig"
+                    match:
+                        Identifier\ContentType: [article, blog_post]
             featured:
                 article:
                     controller: "SillonbolWebBundle:Web:showArticle"
