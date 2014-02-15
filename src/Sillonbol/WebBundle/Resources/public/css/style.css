@@ -266,6 +266,9 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.
 .nav > li > a {padding: 15px 12px}
 #mainmenu.navbar-collapse{max-height:none !important}
 .navbar #menu-secondary{text-transform:none}
+
+#searchForm #srch-term {border:1px solid #f0ede3}
+
 @media (min-width: 1030px ){
   .featured .item-featured:first-of-type .caption{bottom:auto;top:80px;}
 }

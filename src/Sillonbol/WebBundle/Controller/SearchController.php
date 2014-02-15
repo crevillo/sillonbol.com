@@ -28,12 +28,13 @@ class SearchController extends Controller
         $response->setSharedMaxAge( $this->getConfigResolver()->getParameter( 'content.default_ttl' ) );
 
         $request = $this->getRequest();
+        $searchText = $request->get( 'SearchText' );
 
         // Initialize pagination.
         $pager = new Pagerfanta(
             new SillonbolSearchAdapter(
                 $this->getLegacyKernel(),
-                $request->get( 'SearchText' ),
+                $searchText,
                 $this->getRepository()->getContentService()
             )
         );
@@ -43,7 +44,8 @@ class SearchController extends Controller
         return $this->render(
             'SillonbolWebBundle:search:results.html.twig',
             array(
-                'pagerBlog' => $pager
+                'pagerBlog' => $pager,
+                'searchPhrase' => $searchText
             ),
             $response
         );

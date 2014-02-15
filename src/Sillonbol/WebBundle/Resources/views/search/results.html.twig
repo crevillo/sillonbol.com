@@ -2,6 +2,18 @@
 
 {% block content %}
 <div class="col-md-11 cont-grid">
+    <h3 class="sing-tit">Buscar</h3>
+    <div id="searchForm" class="col-md-4">
+        <form action={{ path( 'search' ) }} method="get">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="{{ searchPhrase }}" name="SearchText" id="srch-term">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" name="SearchButton" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row spacer"></div>
     {% if pagerBlog|length() > 0 %}
         <div class="col-md-11 single-in">
             <div class="grid">
