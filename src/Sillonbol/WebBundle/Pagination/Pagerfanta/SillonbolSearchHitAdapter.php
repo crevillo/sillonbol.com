@@ -10,14 +10,14 @@
 namespace Sillonbol\WebBundle\Pagination\Pagerfanta;
 
 use Pagerfanta\Adapter\AdapterInterface;
-use \eZ\Publish\Core\MVC\Legacy\Kernel;
+use eZ\Publish\Core\MVC\Legacy\Kernel;
 use eZFunctionHandler;
 
 /**
  * Pagerfanta adapter for eZ Publish content search.
  * Will return results as SearchHit objects.
  */
-class eZFindResultAdapter implements AdapterInterface
+class eZFindResultHitAdapter implements AdapterInterface
 {
     /**
      * @var eZ\Publish\Core\MVC\Legacy\Kernel
@@ -86,7 +86,7 @@ class eZFindResultAdapter implements AdapterInterface
             'sort' => $sort,
             'as_objects' => false,
             'offset' => $offset,
-            'limit' => $length
+            'limit' => $limit
         );
 
         $searchResults = $this->doSearch( $searchParams );
@@ -95,7 +95,7 @@ class eZFindResultAdapter implements AdapterInterface
         {
             $this->nbResults = $searchResults['SearchCount'];
         }
-
+        
         return $searchResults['SearchResult'];
     }
 
