@@ -1,0 +1,50 @@
+ezpublish:
+    system:
+        default:
+            pagelayout: "pagelayout.html.twig"
+            user:
+                layout: pagelayout.html.twig
+
+            location_view:
+                search:
+                    article:
+                        controller: "SillonbolWebBundle:Web:showArticle"
+                        template: "search\article.html.twig"
+                        match:
+                            Identifier\ContentType: [article, blog_post]
+                featured:
+                    article:
+                        controller: "SillonbolWebBundle:Web:showArticle"
+                        template: "featured\article.html.twig"
+                        match:
+                            Identifier\ContentType: [article, blog_post]
+                line:
+                    article:
+                        controller: "SillonbolWebBundle:Web:showArticle"
+                        template: "line\article.html.twig"
+                        match:
+                            Identifier\ContentType: [article, blog_post]
+                rss:
+                    article:
+                        controller: "SillonbolWebBundle:Web:showArticle"
+                        template: "rss\article.html.twig"
+                        match:
+                            Identifier\ContentType: [article, blog_post]
+                full:
+                    home:
+                        template: "full\home.html.twig"
+                        match:
+                            Identifier\ContentType: [frontpage]
+                    article:
+                        controller: "SillonbolWebBundle:Web:showArticle"
+                        template: "full\article.html.twig"
+                        match:
+                            Identifier\ContentType: [article, blog_post]
+                    page:
+                        template: "full\page.html.twig"
+                        match:
+                            Identifier\ContentType: [pagina]
+                    subcategoria:
+                        controller: "SillonbolWebBundle:Web:categoryList"
+                        match:
+                            Identifier\ContentType: [subcategoria]
