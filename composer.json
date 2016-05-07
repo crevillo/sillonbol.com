@@ -36,7 +36,8 @@
         "symfony/expression-language": "~2.4",
         "ezsystems/legacy-bridge": "@dev",
         "sensio/framework-extra-bundle": "~3.0",
-        "ezsystems/ezplatform-xmltext-fieldtype": "^1.1"
+        "ezsystems/ezplatform-xmltext-fieldtype": "^1.1",
+        "ezsystems/comments-bundle": "~6.0.0"
     },
     "require-dev": {
         "behat/behat": "~3.0",
