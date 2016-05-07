@@ -1,4 +1,4 @@
-{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+{% extends noLayout == true ? viewbaseLayout : pagelayout %}
 
 {% block content %}
 <div class="col-md-11 cont-grid">

@@ -1,4 +1,5 @@
-{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+{% extends noLayout == true ? viewbaseLayout : pagelayout %}
+
 {% set title %}{{ content.contentInfo.name ~ '- Sillonbol.com' }}{% endset %}
 {% set description %}
 {{ ez_render_field( content, 'body' )|striptags[:155] }}...{% endset %}

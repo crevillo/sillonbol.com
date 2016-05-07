@@ -1,4 +1,5 @@
-{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+{% extends noLayout == true ? viewbaseLayout : pagelayout %}
+
 {% set title %}Euroliga, Clásicas de ciclismo y más en Sillonbol.com{% endset %}
 {% block content %}
 <div class="container">
