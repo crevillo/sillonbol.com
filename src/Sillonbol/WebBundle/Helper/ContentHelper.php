@@ -31,14 +31,14 @@ class ContentHelper
     public function getLatestContent( $offset = 0, $limit = 3 )
     {
         $criteria = array(
-            new Criterion\Subtree( '/1/2' ),
+            new Criterion\Subtree( '/1/2/' ),
             new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
             new Criterion\ContentTypeIdentifier( 'article' )
         );
 
         $query = new Query(
             array(
-                'criterion' => new Criterion\LogicalAnd( $criteria ),
+                'query' => new Criterion\LogicalAnd( $criteria ),
                 'sortClauses' => array( new SortClause\DatePublished( Query::SORT_DESC ) )
             )
         );

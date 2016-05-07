@@ -25,7 +25,8 @@ class WebController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function socialLinksAction() {
+    public function socialLinksAction()
+    {
         $rootLocationId = $this->getConfigResolver()->getParameter('content.tree_root.location_id');
 
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
@@ -38,19 +39,19 @@ class WebController extends Controller
         $fb_url = $this->container->getParameter('sillonbol.sociallinks.facebook');
         $tw_url = $this->container->getParameter('sillonbol.sociallinks.twitter');
         $about_us = $this->getRepository()->getLocationService()->loadLocation(
-                $this->container->getParameter('sillonbol.sociallinks.about_us.location_id')
+            $this->container->getParameter('sillonbol.sociallinks.about_us.location_id')
         );
         $contact = $this->getRepository()->getLocationService()->loadLocation(
-                $this->container->getParameter('sillonbol.sociallinks.contact.location_id')
+            $this->container->getParameter('sillonbol.sociallinks.contact.location_id')
         );
 
         return $this->render(
-                        'SillonbolWebBundle:parts:social.html.twig', array(
-                    'fb_url' => $fb_url,
-                    'tw_url' => $tw_url,
-                    'about_us' => $about_us,
-                    'contact' => $contact
-                        ), $response
+            'SillonbolWebBundle:parts:social.html.twig', array(
+            'fb_url' => $fb_url,
+            'tw_url' => $tw_url,
+            'about_us' => $about_us,
+            'contact' => $contact
+        ), $response
         );
     }
 
@@ -58,10 +59,11 @@ class WebController extends Controller
      * Renders the main menu, with cache control
      *
      * @param int selected id of the location marked as active in the menu
-     * 
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function mainMenuAction($selected = 0) {
+    public function mainMenuAction($selected = 0)
+    {
         $rootLocationId = $this->getConfigResolver()->getParameter('content.tree_root.location_id');
 
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
@@ -72,27 +74,20 @@ class WebController extends Controller
         $response->headers->set('X-Location-Id', $rootLocationId);
 
         $includeCriterion = $this->get('sillonbol.criteria_helper')
-                ->generateContentTypeIncludeCriterion(
-                // Get contentType identifiers we want to include from configuration (see default_settings.yml).
+            ->generateContentTypeIncludeCriterion(
+            // Get contentType identifiers we want to include from configuration (see default_settings.yml).
                 $this->container->getParameter('sillonbol.top_menu.content_types_include')
+            );
+
+        $locationList = $this->get('sillonbol.menu_helper')->getTopMenuContent(
+            $rootLocationId, $includeCriterion
         );
 
-        $contentList = $this->get('sillonbol.menu_helper')->getTopMenuContent( $rootLocationId, $includeCriterion );
-
-        $locationList = array();
-        // Looping against search results to build $locationList
-        // Both arrays will be indexed by contentId so that we can easily refer to an element in a list from another element in the other list
-        // See page_topmenu.html.twig
-        foreach ($contentList as $contentId => $content) {
-            $locationList[$contentId] = $this->getRepository()->getLocationService()->loadLocation($content->contentInfo->mainLocationId);
-        }
-
         return $this->render(
-            'SillonbolWebBundle:parts:mainmenu.html.twig',
+            'parts\mainmenu.html.twig',
             array(
-               'locationList' => $locationList,
-               'contentList' => $contentList,
-               'selected' => $selected
+                'locationList' => $locationList,
+                'selected' => $selected
             ),
             $response
         );
@@ -107,21 +102,20 @@ class WebController extends Controller
      * @param array $params
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showArticleAction($locationId, $viewType, $layout = false, array $params = array()) {
-        $location = $this->getRepository()->getLocationService()->loadLocation( $locationId );
-        $path_array = explode( '/', $location->pathString );
-        $category = $this->getRepository()->getLocationService()->loadLocation( $path_array[3] );
+    public function showArticleAction($locationId, $viewType, $layout = false, array $params = array())
+    {
+        $location = $this->getRepository()->getLocationService()->loadLocation($locationId);
+        $path_array = explode('/', $location->pathString);
+        $category = $this->getRepository()->getLocationService()->loadLocation($path_array[3]);
 
         // set some template variables depending on the viewType
-        $twigVars = array( 'category' => $category );
+        $twigVars = array('category' => $category);
 
-        if ( $viewType == 'rss' )
-        {
+        if ($viewType == 'rss') {
             $twigVars['published_rcf822'] = $location->getContentInfo()->publishedDate->format(\DateTime::RFC822);
         }
 
-        if ( ( $viewType == 'search' ) && !empty( $params['highlight'] ) )
-        {
+        if (($viewType == 'search') && !empty($params['highlight'])) {
             $twigVars['highlight'] = $params['highlight'];
         }
 
@@ -142,48 +136,47 @@ class WebController extends Controller
      * @param int $locationId of a category
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function categoryListAction( $locationId = null )
+    public function categoryListAction($locationId = null)
     {
         $response = new Response();
 
         // Setting default cache configuration (you can override it in you siteaccess config)
-        $response->setSharedMaxAge( $this->getConfigResolver()->getParameter( 'content.default_ttl' ) );
+        $response->setSharedMaxAge($this->getConfigResolver()->getParameter('content.default_ttl'));
 
         // Make the response location cache aware for the reverse proxy
-        $response->headers->set( 'X-Location-Id', $locationId );
-        
+        $response->headers->set('X-Location-Id', $locationId);
+
         // Getting location and content from ezpublish dedicated services
         $repository = $this->getRepository();
-        $location = $repository->getLocationService()->loadLocation( $locationId );
-        if ( $location->invisible )
-        {
-            throw new NotFoundHttpException( "Location #$locationId cannot be displayed as it is flagged as invisible." );
+        $location = $repository->getLocationService()->loadLocation($locationId);
+        if ($location->invisible) {
+            throw new NotFoundHttpException("Location #$locationId cannot be displayed as it is flagged as invisible.");
         }
 
         $content = $repository
             ->getContentService()
-            ->loadContentByContentInfo( $location->getContentInfo() );
+            ->loadContentByContentInfo($location->getContentInfo());
 
         // Using the criteria helper (a demobundle custom service) to generate our query's criteria.
         // This is a good practice in order to have less code in your controller.
         $criteria = array();
-        $criteria[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
-        $criteria[] = new Criterion\Subtree( $location->pathString );
-        $criteria[] = new Criterion\ContentTypeIdentifier( array('article', 'blog_post')  );
+        $criteria[] = new Criterion\Visibility(Criterion\Visibility::VISIBLE);
+        $criteria[] = new Criterion\Subtree($location->pathString);
+        $criteria[] = new Criterion\ContentTypeIdentifier(array('article', 'blog_post'));
 
         // Generating query
         $query = new Query();
-        $query->criterion = new Criterion\LogicalAnd( $criteria );
+        $query->criterion = new Criterion\LogicalAnd($criteria);
         $query->sortClauses = array(
-            new SortClause\DatePublished( Query::SORT_DESC )
+            new SortClause\DatePublished(Query::SORT_DESC)
         );
 
         // Initialize pagination.
         $pager = new Pagerfanta(
-            new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
+            new ContentSearchAdapter($query, $this->getRepository()->getSearchService())
         );
-        $pager->setMaxPerPage( $this->container->getParameter( 'sillonbol.category.category_list.limit' ) );
-        $pager->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
+        $pager->setMaxPerPage($this->container->getParameter('sillonbol.category.category_list.limit'));
+        $pager->setCurrentPage($this->getRequest()->get('page', 1));
 
         return $this->render(
             'SillonbolWebBundle:full:categoria.html.twig',
@@ -196,7 +189,8 @@ class WebController extends Controller
         );
     }
 
-    public function articlesAction() {
+    public function articlesAction()
+    {
         return $this->categoryListAction(2);
     }
 

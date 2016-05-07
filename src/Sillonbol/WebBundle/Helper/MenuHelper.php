@@ -8,6 +8,7 @@
 namespace Sillonbol\WebBundle\Helper;
 
 use eZ\Publish\API\Repository\Repository;
+use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
@@ -23,7 +24,7 @@ class MenuHelper
      */
     private $repository;
 
-    public function __construct( Repository $repository )
+    public function __construct(Repository $repository)
     {
         $this->repository = $repository;
     }
@@ -39,24 +40,24 @@ class MenuHelper
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Content[] Content objects, indexed by their contentId.
      */
-    public function getTopMenuContent( $topLocationId, Criterion $criterion = null )
+    public function getTopMenuContent($topLocationId, Criterion $criterion = null)
     {
         $criteria = array(
-            new Criterion\ParentLocationId( $topLocationId ),
-            new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+            new Criterion\ParentLocationId($topLocationId),
+            new Criterion\Visibility(Criterion\Visibility::VISIBLE)
         );
 
-        if ( !empty( $criterion ) )
+        if (!empty($criterion)) {
             $criteria[] = $criterion;
+        }
 
-        $query = new Query(
-            array(
-                'criterion' => new Criterion\LogicalAnd( $criteria ),
-                'sortClauses' => array( new SortClause\LocationPriority( Query::SORT_ASC ) )
-            )
+        $query = new LocationQuery();
+        $query->query = new Criterion\LogicalAnd($criteria);
+        $query->sortClauses = array(new SortClause\Location\Priority(Query::SORT_ASC));
+
+        return $this->buildContentListFromSearchResult(
+            $this->repository->getSearchService()->findLocations($query)
         );
-
-        return $this->buildContentListFromSearchResult( $this->repository->getSearchService()->findContent( $query ) );
     }
 
     /**
@@ -67,11 +68,10 @@ class MenuHelper
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Content[]
      */
-    private function buildContentListFromSearchResult( SearchResult $searchResult )
+    private function buildContentListFromSearchResult(SearchResult $searchResult)
     {
         $contentList = array();
-        foreach ( $searchResult->searchHits as $searchHit )
-        {
+        foreach ($searchResult->searchHits as $searchHit) {
             $contentList[$searchHit->valueObject->contentInfo->id] = $searchHit->valueObject;
         }
 
