@@ -41,7 +41,5 @@ class SillonbolWebExtension extends Extension implements PrependExtensionInterfa
     {
         $config = Yaml::parse( __DIR__ . '/../Resources/config/sillonbol.yml' );
         $container->prependExtensionConfig( 'ezpublish', $config );
-        $config = Yaml::parse( __DIR__ . '/../Resources/config/database_settings.yml' );
-        $container->prependExtensionConfig( 'ezpublish', $config );
     }
 }
