@@ -48,6 +48,7 @@ class AppKernel extends Kernel
             new EzSystems\EzPlatformSolrSearchEngineBundle\EzSystemsEzPlatformSolrSearchEngineBundle(),
             new EzSystems\CommentsBundle\EzSystemsCommentsBundle(),
             new EzSystems\EzPlatformXmlTextFieldTypeBundle\EzSystemsEzPlatformXmlTextFieldTypeBundle(),
+            new Netgen\TagsBundle\NetgenTagsBundle(),
             new \Sillonbol\WebBundle\SillonbolWebBundle(),
             new eZ\Bundle\EzPublishLegacyBundle\EzPublishLegacyBundle($this),
         );
