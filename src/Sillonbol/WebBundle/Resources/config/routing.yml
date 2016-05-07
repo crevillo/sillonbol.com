@@ -1,0 +1,28 @@
+sillonbol_web_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SillonbolWebBundle:Default:index }
+
+contact:
+    path: contacto
+    defaults: { _controller: SillonbolWebBundle:Contact:index }
+
+articulos:
+    path: articulos
+    defaults: { _controller: SillonbolWebBundle:Web:articles } 
+
+contact_process:
+    path: ok
+    defaults: { _controller: SillonbolWebBundle:Contact:ok }
+    
+rss:
+    path: rss
+    defaults: { _controller: SillonbolWebBundle:Feed:index, _format: rss }
+
+search:
+    path: /content/search
+    defaults: {_controller: SillonbolWebBundle:Search:index }
+
+sitemap:
+    path: /sitemap.xml
+    defaults: { _controller: SillonbolWebBundle:SiteMap:siteMap, _format:xml }
+

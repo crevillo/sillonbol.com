@@ -1,0 +1,87 @@
+http_cache:
+    purge_type: local
+siteaccess:
+    default_siteaccess: www
+    list:
+        - www
+        - administrador
+    groups:
+        sillonbol:
+            - www
+            - administrador
+    match:
+        URIElement: '1'
+system:
+    sillonbol:
+        languages:
+            - esl-ES
+        var_dir: var/ezflow_site
+        http_cache:
+            purge_servers: [http://www.sillonbol.com]
+    www:
+        content:
+            view_cache: true
+            ttl_cache: true
+            default_ttl: 14400
+        location_view:
+            search:
+                article:
+                    controller: "SillonbolWebBundle:Web:showArticle"
+                    template: "SillonbolWebBundle:search:article.html.twig"
+                    match:
+                        Identifier\ContentType: [article, blog_post]
+            featured:
+                article:
+                    controller: "SillonbolWebBundle:Web:showArticle"
+                    template: "SillonbolWebBundle:featured:article.html.twig"
+                    match:
+                        Identifier\ContentType: [article, blog_post]
+            line:
+                article:
+                    controller: "SillonbolWebBundle:Web:showArticle"
+                    template: "SillonbolWebBundle:line:article.html.twig"
+                    match:
+                        Identifier\ContentType: [article, blog_post]
+            rss:
+                article:
+                    controller: "SillonbolWebBundle:Web:showArticle"
+                    template: "SillonbolWebBundle:rss:article.html.twig"
+                    match:
+                        Identifier\ContentType: [article, blog_post]
+            full:
+                home:
+                    template: "SillonbolWebBundle:full:home.html.twig"
+                    match:
+                        Identifier\ContentType: [frontpage]
+                article:
+                    controller: "SillonbolWebBundle:Web:showArticle"
+                    template: "SillonbolWebBundle:full:article.html.twig"
+                    match:
+                        Identifier\ContentType: [article, blog_post]
+                page:
+                    template: "SillonbolWebBundle:full:page.html.twig"
+                    match:
+                        Identifier\ContentType: [pagina]
+                subcategoria:
+                    controller: "SillonbolWebBundle:Web:categoryList"
+                    match:
+                        Identifier\ContentType: [subcategoria]
+        fieldtypes:
+            ezxml:
+                custom_tags:
+                    - { path: %kernel.root_dir%/../src/Sillonbol/WebBundle/Resources/custom_tags.xsl, priority: 10 }
+        image_variations:
+            big:
+                reference: null
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [1200] }
+                    - { name: geometry/crop, params: [1200, 600, 0, 0] }
+            featured:
+                reference: null
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [800] }
+                    - { name: geometry/crop, params: [800, 800, 0, 0] }
+            line:
+                reference: null
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [400] }

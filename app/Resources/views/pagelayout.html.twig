@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% if content.contentInfo is defined and title is not defined %}
+{% set title %}
+{{ content.contentInfo.name }} / Sillonbol.com
+{% endset %}
+{% endif %}
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% include 'SillonbolWebBundle::page_head.html.twig' %}
+    {% include 'SillonbolWebBundle::page_head_style.html.twig' %}
+    {% include 'SillonbolWebBundle::page_head_script.html.twig' %}
+<meta name="google-site-verification" content="Vm7jfjU9qnuXlZb_1Xzx6AzhoS-22y7WvMg5-mhMHFk" />
+
+</head>
+<body class="home {% if app.request.get( 'locationId' ) %}location-{{ app.request.get('locationId') }}{% endif %}">
+    {% block header %}
+        {% include 'SillonbolWebBundle::page_header.html.twig' %}
+    {% endblock %}
+    {% if app.request.attributes.get( 'locationId' ) == 2 %}
+        {{ render_esi( controller( 'SillonbolWebBundle:Frontpage:mainBlock' ) ) }}
+    {% else %}
+    <div class="row spacer"></div>
+    {% endif %}
+    {% block socialandsearch %}
+       {% include 'SillonbolWebBundle::page_secondary_header.html.twig' %}
+    {% endblock %}
+    {% if app.request.attributes.get( 'locationId' ) == 2 %}
+    <div id="banner" class="text-center"><a href="http://www.sorteosdeporte.es" target="_blank"><img src="{{ asset('bundles/sillonbolweb/img/sorteosdeporte.jpg') }}"" ></a></div>
+    {% endif %}
+    {% block content %}{% endblock %}
+    {% block footer %}
+    <div class="row">
+        {% include 'SillonbolWebBundle::page_footer.html.twig' %}
+        {% include 'SillonbolWebBundle::page_footer_script.html.twig' %}
+</div>
+    {% endblock %}
+</body>
+</html>
+

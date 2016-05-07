@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>{{ url('ez_urlalias', {'locationId': home.contentInfo.mainLocationId }) }}</loc>
+        <lastmod>{{ home.contentInfo.modificationDate|date('c') }}</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+{% for menu in menuList %}
+    <url>
+        <loc>{{ url('ez_urlalias', {'locationId':menu.id} ) }}</loc>
+	<changefreq>weekly</changefreq>
+    </url>
+{% endfor %}
+{% for article in articles %}
+    <url>
+        <loc>{{ url('ez_urlalias', {'locationId':article.id} ) }}</loc>
+	<lastmod>{{ article.contentInfo.modificationDate|date('c') }}</lastmod>
+	<changefreq>never</changefreq>
+    </url>
+{% endfor %}
+</urlset>

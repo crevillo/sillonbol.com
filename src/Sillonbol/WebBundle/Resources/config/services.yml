@@ -1,0 +1,42 @@
+parameters:
+    sillonbol.criteria_helper.class: Sillonbol\WebBundle\Helper\CriteriaHelper
+    sillonbol.menu_helper.class: Sillonbol\WebBundle\Helper\MenuHelper
+    sillonbol.content_helper.class: Sillonbol\WebBundle\Helper\ContentHelper
+    ezpublish_legacy.www.module_default_layout: "SillonbolWebBundle::pagelayout_legacy.html.twig"
+    sillonbol.twig.extension.metadata.class: Sillonbol\WebBundle\Twig\Extensions\FezMetaDataExtension
+    ezpublish.fieldType.disquscomments.class: %ezpublish.fieldType.eznull.class%
+    ezpublish.fieldType.disquscomments.converter.class: %ezpublish.fieldType.eznull.converter.class%
+
+services:
+    sillonbol.criteria_helper:
+        class: %sillonbol.criteria_helper.class%
+
+    sillonbol.menu_helper:
+        class: %sillonbol.menu_helper.class%
+        arguments: [@ezpublish.api.repository]
+
+    sillonbol.content_helper:
+        class: %sillonbol.content_helper.class%
+        arguments: [@ezpublish.api.repository]
+
+    ezpublish.fieldType.disquscomments:
+        class: %ezpublish.fieldType.disquscomments.class%
+        parent: ezpublish.fieldType
+        arguments: ["disquscomments"]
+        tags:
+            - {name: ezpublish.fieldType, alias: disquscomments}
+
+    ezpublish.fieldType.disquscomments.converter:
+        class: %ezpublish.fieldType.disquscomments.converter.class%
+        tags:
+            - {name: ezpublish.storageEngine.legacy.converter, alias: disquscomments, lazy: true, callback: "::create"}
+
+
+    sillonbol.twig.extension.metadata:
+            class: %sillonbol.twig.extension.metadata.class%
+            arguments:
+                - @ezpublish.cache_pool
+            calls:
+                - [setConnection, [@ezpublish.api.storage_engine.legacy.dbhandler]]
+            tags:
+                - {name: 'twig.extension'}

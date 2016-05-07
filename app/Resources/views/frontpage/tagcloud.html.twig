@@ -1,0 +1,8 @@
+<div id="tag-cloud" class="widget">
+    <h3>Nuestros tags</h3>
+    <div class="tags">
+{% for tag in tags %}
+      <a class="url" href="{{ path( 'ez_legacy', { 'module_uri': '/tags/view/' ~ tag.tag|url_encode } ) }}">{{ tag.tag }}</a> ({{ tag.count }}){% if not loop.last %}, {% endif %}
+{% endfor %}...
+    </div>
+</div>

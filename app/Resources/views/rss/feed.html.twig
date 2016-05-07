@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Sillonbol.com</title>
+        <link>http://www.sillonbol.com/</link>
+        <description>El deporte y la madre que lo pario</description>
+        <language>es-ES</language>
+        <managingEditor>hola@sillonbol.com</managingEditor>
+        <lastBuildDate>{{ last_building_date }}</lastBuildDate>
+        <ttl>60</ttl>
+    </channel>
+    {% for contentId, location in locationList %}
+    {{ render( controller( 'ez_content:viewLocation', {'locationId': location.contentInfo.mainLocationId, 'viewType': 'rss'} ) ) }}
+    {% endfor %}
+</rss>

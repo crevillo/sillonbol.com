@@ -1,0 +1,17 @@
+<a href="{{ path( location ) }}">
+    <div class="caption">
+        <div class="cat"><span>{{ category.contentInfo.name }}</span></div>
+        <div class="date">
+            <i class="fa fa-clock-o"></i> {{ location.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale, null, "d MMM Y" ) }}
+        </div>
+        <h2 class="title">{{ ez_render_field( content, 'title' ) }}</h2>
+    </div>
+     {{ ez_render_field(
+                    content,
+                    'image',
+                    {
+                        'template': 'SillonbolWebBundle:fields:ezimage_simple.html.twig',
+                        'parameters': {'alias': 'featured'}
+                    }
+                ) }}
+</a>

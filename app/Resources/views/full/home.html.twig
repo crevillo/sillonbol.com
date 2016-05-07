@@ -1,0 +1,18 @@
+{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+{% set title %}Euroliga, Clásicas de ciclismo y más en Sillonbol.com{% endset %}
+{% block content %}
+<div class="container">
+<div class="col-md-9 cont-grid">
+    <div class="grid">
+        {{ render( controller( 'SillonbolWebBundle:Frontpage:secondaryBlock' ) ) }}
+    </div>
+</div>
+<div class="col-md-3 sidebar">
+    {{ render( controller( 'SillonbolWebBundle:Frontpage:commentsBlock' ) ) }}
+    {{ render( controller( 'SillonbolWebBundle:Frontpage:tagsBlock' ) ) }}
+ </div>
+</div>
+<div class="clearfix text-center row">
+   <a href="{{ path('articulos') }}">Todos los artículos</a>
+</div>
+{% endblock %}

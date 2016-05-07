@@ -1,0 +1,8 @@
+system:
+    sillonbol:
+        database:
+            type: mysql
+            user: www
+            password: '|_$3hO{_/33=3E2'
+            server: localhost
+            database_name: dbweb

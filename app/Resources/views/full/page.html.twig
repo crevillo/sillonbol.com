@@ -1,0 +1,21 @@
+{% extends "SillonbolWebBundle::pagelayout.html.twig" %}
+{% set title %}{{ content.contentInfo.name ~ '- Sillonbol.com' }}{% endset %}
+{% block content %}
+<div class="col-md-11 single">
+    <div class="col-md-11 single-in">
+        <div class="sing-tit-cont">
+            <h3 class="sing-tit">{{ ez_render_field( content, 'titulo' ) }}</h3>
+        </div>
+
+        <div class="sing-cont">
+            <div class="sing-spacer">
+                {% if not ez_is_field_empty( content, 'contenido' ) %}
+                <div class="attribute-long">
+                    {{ ez_render_field( content, 'contenido' ) }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

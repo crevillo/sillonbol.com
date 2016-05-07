@@ -1,0 +1,14 @@
+parameters:
+    #socialmenu
+    sillonbol.sociallinks.facebook: 'http://www.facebook.com/sillonbol'
+    sillonbol.sociallinks.twitter: 'http://www.twitter.com/Sillonbolcom'
+    sillonbol.sociallinks.about_us.location_id: 6309
+    sillonbol.sociallinks.contact.location_id: 6310
+    # top menu include classes
+    sillonbol.top_menu.content_types_include: [subcategoria]
+    ez_comments.default.default_provider: disqus
+    sillonbol.category.category_list.limit: 9
+    ezsettings.www.field_templates:
+       - {template: EzPublishCoreBundle::content_fields.html.twig, priority: 0}
+       - {template: SillonbolWebBundle::content_fields.html.twig, priority: 0}
+       - {template: SillonbolWebBundle::eztags_content_field.html.twig, priority: 0}
