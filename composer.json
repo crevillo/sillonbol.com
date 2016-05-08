@@ -38,7 +38,8 @@
         "sensio/framework-extra-bundle": "~3.0",
         "ezsystems/ezplatform-xmltext-fieldtype": "^1.1",
         "ezsystems/comments-bundle": "~6.0.0",
-        "netgen/tagsbundle": "^2.2"
+        "netgen/tagsbundle": "^2.2",
+        "genemu/form-bundle": "^3.0@dev"
     },
     "require-dev": {
         "behat/behat": "~3.0",
