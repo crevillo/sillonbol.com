@@ -31,7 +31,6 @@ services:
         tags:
             - {name: ezpublish.storageEngine.legacy.converter, alias: disquscomments, lazy: true, callback: "::create"}
 
-
     sillonbol.twig.extension.metadata:
             class: %sillonbol.twig.extension.metadata.class%
             arguments:

@@ -23,8 +23,7 @@ class FezMetaDataExtension extends Twig_Extension
 
     public function __construct(
         Pool $pool
-    )
-    {
+    ) {
         $this->pool = $pool;
     }
 
@@ -37,15 +36,14 @@ class FezMetaDataExtension extends Twig_Extension
      * @throws \RuntimeException if $dbHandler is not an instance of
      *         {@link \eZ\Publish\Core\Persistence\Database\DatabaseHandler}
      */
-    public function setConnection( $dbHandler )
+    public function setConnection($dbHandler)
     {
         // This obviously violates the Liskov substitution Principle, but with
         // the given class design there is no sane other option. Actually the
         // dbHandler *should* be passed to the constructor, and there should
         // not be the need to post-inject it.
-        if ( !$dbHandler instanceof DatabaseHandler )
-        {
-            throw new \RuntimeException( "Invalid dbHandler passed" );
+        if (!$dbHandler instanceof DatabaseHandler) {
+            throw new \RuntimeException("Invalid dbHandler passed");
         }
 
         $this->dbHandler = $dbHandler;
@@ -60,9 +58,8 @@ class FezMetaDataExtension extends Twig_Extension
      */
     protected function getConnection()
     {
-        if ( $this->dbHandler === null )
-        {
-            throw new \RuntimeException( "Missing database connection." );
+        if ($this->dbHandler === null) {
+            throw new \RuntimeException("Missing database connection.");
         }
         return $this->dbHandler;
     }
@@ -77,8 +74,8 @@ class FezMetaDataExtension extends Twig_Extension
         return array(
             new Twig_SimpleFunction(
                 'ez_fezmetadata',
-                array( $this, 'getMetadata' ),
-                array( 'is_safe' => array( 'html' ) )
+                array($this, 'getMetadata'),
+                array('is_safe' => array('html'))
             ),
         );
     }
@@ -89,35 +86,32 @@ class FezMetaDataExtension extends Twig_Extension
      * @param int $contentInfoId
      * @return array
      */
-    public function getMetaData( $contentInfoId )
+    public function getMetaData($contentInfoId)
     {
+        $metadata = array();
 
+        $dbHandler = $this->getConnection();
 
-            $metadata = array();
+        $query = $dbHandler->createSelectQuery();
+        $query->select("meta_name", "meta_value")
+            ->from($dbHandler->quoteTable("fezmeta_data"))
+            ->where(
+                $query->expr->lAnd(
+                    $query->expr->eq(
+                        $dbHandler->quoteColumn("contentobject_id"),
+                        $contentInfoId
+                    )
+                )
+            );
 
-            $dbHandler = $this->getConnection();
+        $statement = $query->prepare();
+        $statement->execute();
 
-            $query = $dbHandler->createSelectQuery();
-            $query->select( "meta_name", "meta_value" )
-                  ->from( $dbHandler->quoteTable( "fezmeta_data" ) )
-                  ->where(
-                      $query->expr->lAnd(
-                          $query->expr->eq(
-                              $dbHandler->quoteColumn( "contentobject_id" ),
-                              $contentInfoId
-                          )
-                      )
-                  );
-
-            $statement = $query->prepare();
-            $statement->execute();
-
-            foreach ($statement->fetchAll() as $row) {
-                foreach ($row as $key => $val) {
-                    $metadata[$row['meta_name']] = $row['meta_value'];
-                }
+        foreach ($statement->fetchAll() as $row) {
+            foreach ($row as $key => $val) {
+                $metadata[$row['meta_name']] = $row['meta_value'];
             }
-
+        }
 
         return $metadata;
     }
