@@ -9,6 +9,7 @@
 namespace Sillonbol\WebBundle\Controller;
 
 use eZ\Bundle\EzPublishCoreBundle\Controller;
+use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
@@ -46,7 +47,7 @@ class WebController extends Controller
         );
 
         return $this->render(
-            'SillonbolWebBundle:parts:social.html.twig', array(
+            'parts\\social.html.twig', array(
             'fb_url' => $fb_url,
             'tw_url' => $tw_url,
             'about_us' => $about_us,
@@ -84,7 +85,7 @@ class WebController extends Controller
         );
 
         return $this->render(
-            'parts\mainmenu.html.twig',
+            'parts\\mainmenu.html.twig',
             array(
                 'locationList' => $locationList,
                 'selected' => $selected
@@ -96,15 +97,13 @@ class WebController extends Controller
     /**
      * Renders article with extra parameters that controls page elements visibility such as image and summary
      *
-     * @param $locationId
-     * @param $viewType
-     * @param bool $layout
-     * @param array $params
+     * @param ContentView $view
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showArticleAction($locationId, $viewType, $layout = false, array $params = array())
+    public function showArticleAction(ContentView $view)
     {
-        $location = $this->getRepository()->getLocationService()->loadLocation($locationId);
+        $location = $view->getLocation();
+        $viewType = $view->getViewType();
         $path_array = explode('/', $location->pathString);
         $category = $this->getRepository()->getLocationService()->loadLocation($path_array[3]);
 
@@ -119,12 +118,9 @@ class WebController extends Controller
             $twigVars['highlight'] = $params['highlight'];
         }
 
-        return $this->get('ez_content')->viewLocation(
-            $locationId,
-            $viewType,
-            $layout,
-            $twigVars
-        );
+        $view->addParameters($twigVars);
+
+        return $view;
     }
 
     /**
@@ -136,26 +132,21 @@ class WebController extends Controller
      * @param int $locationId of a category
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function categoryListAction($locationId = null)
+    public function categoryListAction(ContentView $view)
     {
         $response = new Response();
+        $location = $view->getLocation();
 
         // Setting default cache configuration (you can override it in you siteaccess config)
         $response->setSharedMaxAge($this->getConfigResolver()->getParameter('content.default_ttl'));
 
         // Make the response location cache aware for the reverse proxy
-        $response->headers->set('X-Location-Id', $locationId);
+        $response->headers->set('X-Location-Id', $location->id);
 
         // Getting location and content from ezpublish dedicated services
-        $repository = $this->getRepository();
-        $location = $repository->getLocationService()->loadLocation($locationId);
         if ($location->invisible) {
-            throw new NotFoundHttpException("Location #$locationId cannot be displayed as it is flagged as invisible.");
+            throw new NotFoundHttpException("Location #$location->id cannot be displayed as it is flagged as invisible.");
         }
-
-        $content = $repository
-            ->getContentService()
-            ->loadContentByContentInfo($location->getContentInfo());
 
         // Using the criteria helper (a demobundle custom service) to generate our query's criteria.
         // This is a good practice in order to have less code in your controller.
@@ -166,7 +157,51 @@ class WebController extends Controller
 
         // Generating query
         $query = new Query();
-        $query->criterion = new Criterion\LogicalAnd($criteria);
+        $query->query = new Criterion\LogicalAnd($criteria);
+        $query->sortClauses = array(
+            new SortClause\DatePublished(Query::SORT_DESC)
+        );
+
+        // Initialize pagination.
+        $pager = new Pagerfanta(
+            new ContentSearchAdapter($query, $this->getRepository()->getSearchService())
+        );
+        $pager->setMaxPerPage($this->container->getParameter('sillonbol.category.category_list.limit'));
+        $pager->setCurrentPage($this->getRequest()->get('page', 1));
+
+        $view->addParameters([
+            'pagerBlog' => $pager
+        ]);
+
+        return $view;
+    }
+
+    public function articlesAction()
+    {
+        $response = new Response();
+        $location = $this->getRepository()->getLocationService()->loadLocation(2);
+
+        // Setting default cache configuration (you can override it in you siteaccess config)
+        $response->setSharedMaxAge($this->getConfigResolver()->getParameter('content.default_ttl'));
+
+        // Make the response location cache aware for the reverse proxy
+        $response->headers->set('X-Location-Id', $location->id);
+
+        // Getting location and content from ezpublish dedicated services
+        if ($location->invisible) {
+            throw new NotFoundHttpException("Location #$location->id cannot be displayed as it is flagged as invisible.");
+        }
+
+        // Using the criteria helper (a demobundle custom service) to generate our query's criteria.
+        // This is a good practice in order to have less code in your controller.
+        $criteria = array();
+        $criteria[] = new Criterion\Visibility(Criterion\Visibility::VISIBLE);
+        $criteria[] = new Criterion\Subtree($location->pathString);
+        $criteria[] = new Criterion\ContentTypeIdentifier(array('article', 'blog_post'));
+
+        // Generating query
+        $query = new Query();
+        $query->query = new Criterion\LogicalAnd($criteria);
         $query->sortClauses = array(
             new SortClause\DatePublished(Query::SORT_DESC)
         );
@@ -179,19 +214,13 @@ class WebController extends Controller
         $pager->setCurrentPage($this->getRequest()->get('page', 1));
 
         return $this->render(
-            'SillonbolWebBundle:full:categoria.html.twig',
+            ':full:categoria.html.twig',
             array(
-                'location' => $location,
-                'content' => $content,
-                'pagerBlog' => $pager
+                'pagerBlog' => $pager,
+                'location' => $location
             ),
             $response
         );
-    }
-
-    public function articlesAction()
-    {
-        return $this->categoryListAction(2);
     }
 
 }

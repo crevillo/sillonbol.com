@@ -104,3 +104,18 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+ez_comments:
+    system:
+        site_group:
+            default_provider: no_comments
+            disqus:
+                shortname: sillonbolcom
+            content_comments:
+                blog_post:
+                    enabled: true
+                    provider: disqus
+                    match:
+                        Identifier\ContentType:
+                            - article
+                            - blog_post

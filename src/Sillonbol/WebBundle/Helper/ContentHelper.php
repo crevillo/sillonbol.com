@@ -23,29 +23,29 @@ class ContentHelper
      */
     private $repository;
 
-    public function __construct( Repository $repository )
+    public function __construct(Repository $repository)
     {
         $this->repository = $repository;
     }
 
-    public function getLatestContent( $offset = 0, $limit = 3 )
+    public function getLatestContent($offset = 0, $limit = 3)
     {
         $criteria = array(
-            new Criterion\Subtree( '/1/2/' ),
-            new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
-            new Criterion\ContentTypeIdentifier( 'article' )
+            new Criterion\Subtree('/1/2/'),
+            new Criterion\Visibility(Criterion\Visibility::VISIBLE),
+            new Criterion\ContentTypeIdentifier('article')
         );
 
         $query = new Query(
             array(
-                'query' => new Criterion\LogicalAnd( $criteria ),
-                'sortClauses' => array( new SortClause\DatePublished( Query::SORT_DESC ) )
+                'query' => new Criterion\LogicalAnd($criteria),
+                'sortClauses' => array(new SortClause\DatePublished(Query::SORT_DESC))
             )
         );
         $query->offset = $offset;
         $query->limit = $limit;
 
-        return $this->buildContentListFromSearchResult( $this->repository->getSearchService()->findContent( $query ) );
+        return $this->buildContentListFromSearchResult($this->repository->getSearchService()->findContent($query));
     }
 
     /**
@@ -56,11 +56,10 @@ class ContentHelper
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Content[]
      */
-    private function buildContentListFromSearchResult( SearchResult $searchResult )
+    private function buildContentListFromSearchResult(SearchResult $searchResult)
     {
         $contentList = array();
-        foreach ( $searchResult->searchHits as $searchHit )
-        {
+        foreach ($searchResult->searchHits as $searchHit) {
             $contentList[$searchHit->valueObject->contentInfo->id] = $searchHit->valueObject;
         }
 

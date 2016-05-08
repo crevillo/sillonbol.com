@@ -9,6 +9,6 @@ parameters:
     ez_comments.default.default_provider: disqus
     sillonbol.category.category_list.limit: 9
     ezsettings.www.field_templates:
-       - {template: EzPublishCoreBundle::content_fields.html.twig, priority: 0}
-       - {template: SillonbolWebBundle::content_fields.html.twig, priority: 0}
-       - {template: SillonbolWebBundle::eztags_content_field.html.twig, priority: 0}
+       - {template: content_fields.html.twig, priority: 0}
+       - {template: content_fields.html.twig, priority: 0}
+       - {template: eztags_content_field.html.twig, priority: 0}
