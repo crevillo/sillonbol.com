@@ -30,7 +30,7 @@ class ContactController extends Controller
                     ->setTo('hola@sillonbol.com')
                     ->setBody(
                         $this->renderView(
-                            'SillonbolWebBundle:contact:mail.html.twig',
+                            ':contact:mail.html.twig',
                             array(
                                 'ip' => $request->getClientIp(),
                                 'name' => $form->get('name')->getData(),
@@ -49,7 +49,7 @@ class ContactController extends Controller
         }
 
         return $this->render(
-            'SillonbolWebBundle:contact:contact.html.twig',
+            ':contact:contact.html.twig',
             array(
                 'form' => $form->createView()
             )

@@ -49,6 +49,7 @@ class AppKernel extends Kernel
             new EzSystems\CommentsBundle\EzSystemsCommentsBundle(),
             new EzSystems\EzPlatformXmlTextFieldTypeBundle\EzSystemsEzPlatformXmlTextFieldTypeBundle(),
             new Netgen\TagsBundle\NetgenTagsBundle(),
+            new \Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new \Sillonbol\WebBundle\SillonbolWebBundle(),
             new eZ\Bundle\EzPublishLegacyBundle\EzPublishLegacyBundle($this),
         );
