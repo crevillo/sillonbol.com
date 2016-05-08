@@ -21,18 +21,4 @@ system:
             ezxml:
                 custom_tags:
                     - { path: %kernel.root_dir%/../src/Sillonbol/WebBundle/Resources/custom_tags.xsl, priority: 10 }
-        image_variations:
-            big:
-                reference: null
-                filters:
-                    - { name: geometry/scalewidthdownonly, params: [1200] }
-                    - { name: geometry/crop, params: [1200, 600, 0, 0] }
-            featured:
-                reference: null
-                filters:
-                    - { name: geometry/scalewidthdownonly, params: [800] }
-                    - { name: geometry/crop, params: [800, 800, 0, 0] }
-            line:
-                reference: null
-                filters:
-                    - { name: geometry/scalewidthdownonly, params: [400] }
+
