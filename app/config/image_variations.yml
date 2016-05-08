@@ -16,3 +16,17 @@ ezpublish:
                        reference: null
                        filters:
                            - { name: geometry/scalewidthdownonly, params: [400] }
+                   contenido_derecha:
+                       reference: null
+                       filters:
+                           - {name: geometry/scaledownonly, params: [250, 1500]}
+                   contenido_todoancho:
+                       reference: null
+                       filters:
+                           - {name: geometry/scaledownonly, params: [590, 1500]}
+                   small:
+                       reference: null
+                       filters:
+                           - {name: geometry/scaledownonly, params: [100, 100]}
+
+

@@ -6,7 +6,6 @@ parameters:
     sillonbol.sociallinks.contact.location_id: 6310
     # top menu include classes
     sillonbol.top_menu.content_types_include: [subcategoria]
-    ez_comments.default.default_provider: disqus
     sillonbol.category.category_list.limit: 9
     ezsettings.www.field_templates:
        - {template: content_fields.html.twig, priority: 0}

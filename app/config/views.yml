@@ -30,6 +30,11 @@ ezpublish:
                         template: :rss:article.html.twig
                         match:
                             Identifier\ContentType: [article, blog_post]
+                embed:
+                    article:
+                        template: :embed:image.html.twig
+                        match:
+                            Identifier\ContentType: [image]
                 full:
                     home:
                         template: :full:home.html.twig

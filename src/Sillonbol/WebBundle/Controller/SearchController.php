@@ -8,7 +8,7 @@
 
 namespace Sillonbol\WebBundle\Controller;
 
-use eZ\Bundle\EzPublishCoreBundle\Controller;
+use eZ\Bundle\EzPublishLegacyBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Sillonbol\WebBundle\Pagination\Pagerfanta\SillonbolSearchAdapter;
 use Pagerfanta\Pagerfanta;
@@ -42,7 +42,7 @@ class SearchController extends Controller
         $pager->setCurrentPage( $request->get( 'page', 1 ) );
 
         return $this->render(
-            'SillonbolWebBundle:search:results.html.twig',
+            ':search:results.html.twig',
             array(
                 'pagerBlog' => $pager,
                 'searchPhrase' => $searchText,
