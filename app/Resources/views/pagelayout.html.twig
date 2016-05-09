@@ -12,31 +12,43 @@
     {% include 'page_head.html.twig' %}
     {% include 'page_head_style.html.twig' %}
     {% include 'page_head_script.html.twig' %}
-<meta name="google-site-verification" content="Vm7jfjU9qnuXlZb_1Xzx6AzhoS-22y7WvMg5-mhMHFk" />
+    <meta name="google-site-verification" content="Vm7jfjU9qnuXlZb_1Xzx6AzhoS-22y7WvMg5-mhMHFk"/>
 
 </head>
 <body class="home {% if app.request.get( 'locationId' ) %}location-{{ app.request.get('locationId') }}{% endif %}">
-    {% block header %}
-        {% include 'page_header.html.twig' %}
-    {% endblock %}
-    {% if app.request.attributes.get( 'locationId' ) == 2 %}
-        {{ render_esi( controller( 'SillonbolWebBundle:Frontpage:mainBlock' ) ) }}
-    {% else %}
+{% block header %}
+    {% include 'page_header.html.twig' %}
+{% endblock %}
+{% if app.request.attributes.get( 'locationId' ) == 2 %}
+    {{ render_esi( controller( 'SillonbolWebBundle:Frontpage:mainBlock' ) ) }}
+{% else %}
     <div class="row spacer"></div>
-    {% endif %}
-    {% block socialandsearch %}
-       {% include 'page_secondary_header.html.twig' %}
-    {% endblock %}
-    {% if app.request.attributes.get( 'locationId' ) == 2 %}
-    <div id="banner" class="text-center"><a href="http://www.sorteosdeporte.es" target="_blank"><img src="{{ asset('bundles/sillonbolweb/img/sorteosdeporte.jpg') }}"" ></a></div>
-    {% endif %}
-    {% block content %}{% endblock %}
-    {% block footer %}
+{% endif %}
+{% block socialandsearch %}
+    {% include 'page_secondary_header.html.twig' %}
+{% endblock %}
+{% if app.request.attributes.get( 'locationId' ) == 2 %}
+    <div id="banner" class="text-center"><a href="http://www.sorteosdeporte.es" target="_blank"><img
+                    src="{{ asset('bundles/sillonbolweb/img/sorteosdeporte.jpg') }}"" ></a></div>
+{% endif %}
+{% block content %}{% endblock %}
+{% block footer %}
     <div class="row">
+
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Probando -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9948983203859787"
+             data-ad-slot="7419513355"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
         {% include 'page_footer.html.twig' %}
         {% include 'page_footer_script.html.twig' %}
-</div>
-    {% endblock %}
+    </div>
+{% endblock %}
 </body>
 </html>
 
