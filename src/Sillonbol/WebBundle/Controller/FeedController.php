@@ -40,7 +40,7 @@ class FeedController extends Controller
         $d = new \DateTime('NOW');
 
         return $this->render(
-            'SillonbolWebBundle:rss:feed.html.twig',
+            ':rss:feed.html.twig',
             array(
                 'latest_content' => $latestContent,
                 'locationList' => $locationList,
