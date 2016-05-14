@@ -4,6 +4,7 @@ parameters:
     sillonbol.content_helper.class: Sillonbol\WebBundle\Helper\ContentHelper
     ezpublish_legacy.www.module_default_layout: "::pagelayout_legacy.html.twig"
     sillonbol.twig.extension.metadata.class: Sillonbol\WebBundle\Twig\Extensions\FezMetaDataExtension
+    sillonbol.twig.extension.adsense.class: Sillonbol\WebBundle\Twig\Extensions\AdsenseExtension
     ezpublish.fieldType.disquscomments.class: %ezpublish.fieldType.eznull.class%
     ezpublish.fieldType.disquscomments.converter.class: %ezpublish.fieldType.eznull.converter.class%
     eztags.pagerfanta.related_content_adapter.class: Sillonbol\WebBundle\Pagination\Pagerfanta\RelatedContentAdapter
@@ -34,13 +35,13 @@ services:
             - {name: ezpublish.storageEngine.legacy.converter, alias: disquscomments, lazy: true, callback: "::create"}
 
     sillonbol.twig.extension.metadata:
-            class: %sillonbol.twig.extension.metadata.class%
-            arguments:
-                - @ezpublish.cache_pool
-            calls:
-                - [setConnection, [@ezpublish.api.storage_engine.legacy.dbhandler]]
-            tags:
-                - {name: 'twig.extension'}
+        class: %sillonbol.twig.extension.metadata.class%
+        arguments:
+            - @ezpublish.cache_pool
+        calls:
+            - [setConnection, [@ezpublish.api.storage_engine.legacy.dbhandler]]
+        tags:
+            - {name: 'twig.extension'}
 
     sillonbol.service.tags:
         class: '%sillonbol.service.tags.class%'
@@ -50,3 +51,8 @@ services:
         class: %eztags.pagerfanta.related_content_adapter.class%
         arguments:
             - @sillonbol.service.tags
+
+    sillonbol.twig.extension.adsense:
+        class: '%sillonbol.twig.extension.adsense.class%'
+        tags:
+            - {name: 'twig.extension'}
