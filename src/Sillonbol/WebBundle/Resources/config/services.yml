@@ -2,7 +2,7 @@ parameters:
     sillonbol.criteria_helper.class: Sillonbol\WebBundle\Helper\CriteriaHelper
     sillonbol.menu_helper.class: Sillonbol\WebBundle\Helper\MenuHelper
     sillonbol.content_helper.class: Sillonbol\WebBundle\Helper\ContentHelper
-    ezpublish_legacy.www.module_default_layout: "SillonbolWebBundle::pagelayout_legacy.html.twig"
+    ezpublish_legacy.www.module_default_layout: "::pagelayout_legacy.html.twig"
     sillonbol.twig.extension.metadata.class: Sillonbol\WebBundle\Twig\Extensions\FezMetaDataExtension
     ezpublish.fieldType.disquscomments.class: %ezpublish.fieldType.eznull.class%
     ezpublish.fieldType.disquscomments.converter.class: %ezpublish.fieldType.eznull.converter.class%
