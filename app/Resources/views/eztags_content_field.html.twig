@@ -3,7 +3,7 @@
         <i class="fa fa-tag"></i>
 {% spaceless %}
     {% for tag in field.value.tags %}
-        <a href="{{ path( 'ez_legacy', { 'module_uri': '/tags/view/' ~ tag.keyword|url_encode } ) }}">{{ tag.keyword }}</a>{% if not loop.last %}, {% endif %}
+        <a href="{{ path( tag ) }}">{{ netgen_tags_tag_keyword( tag ) }}</a>{% if not loop.last %}, {% endif %}
     {% endfor %}
 {% endspaceless %}
 </span></p>

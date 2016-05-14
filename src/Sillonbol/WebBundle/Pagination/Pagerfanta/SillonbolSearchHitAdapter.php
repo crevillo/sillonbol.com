@@ -45,15 +45,15 @@ class SillonbolSearchHitAdapter implements AdapterInterface
      * @param \eZ\Publish\Core\MVC\Legacy\Kernel $legacyKernel
      * @param string $searchTerm
      */
-    public function __construct( Kernel $legacyKernel, $searchTerm )
+    public function __construct(Kernel $legacyKernel, $searchTerm)
     {
         $this->legacyKernel = $legacyKernel;
         $this->searchTerm = $searchTerm;
         $this->defaultSearchParams = array(
             'query' => $this->searchTerm,
             'as_objects' => false,
-            'class_id' => array( 'article', 'blog_post' ),
-            'fields_to_return' => array( 'id', 'highlight' )
+            'class_id' => array('article', 'blog_post'),
+            'fields_to_return' => array('id', 'highlight')
         );
     }
 
@@ -64,12 +64,11 @@ class SillonbolSearchHitAdapter implements AdapterInterface
      */
     public function getNbResults()
     {
-        if ( isset( $this->nbResults ) )
-        {
+        if (isset($this->nbResults)) {
             return $this->nbResults;
         }
 
-        $searchResults = $this->doSearch( $this->defaultSearchParams + array( 'limit' => 0 ) );
+        $searchResults = $this->doSearch($this->defaultSearchParams + array('limit' => 0));
 
         return $this->nbResults = $searchResults['SearchCount'];
     }
@@ -82,41 +81,38 @@ class SillonbolSearchHitAdapter implements AdapterInterface
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Search\SearchHit The slice.
      */
-    public function getSlice( $offset, $length )
+    public function getSlice($offset, $length)
     {
         $sort = array(
             'score' => 'desc',
             'published' => 'desc',
         );
 
-        
         $searchParams = $this->defaultSearchParams + array(
-            'sort' => $sort,
-            'offset' => $offset,
-            'limit' => $length
-        );
+                'sort' => $sort,
+                'offset' => $offset,
+                'limit' => $length
+            );
 
-        $searchResults = $this->doSearch( $searchParams );
+        $searchResults = $this->doSearch($searchParams);
 
-        if ( !isset( $this->nbResults ) )
-        {
+        if (!isset($this->nbResults)) {
             $this->nbResults = $searchResults['SearchCount'];
         }
-        
+
         return $searchResults['SearchResult'];
     }
 
     /**
      * Executes the eZFind query via callback function
-     * 
+     *
      * @param array $searchParams
      * @return array eZFindResult
      */
-    private function doSearch( array $searchParams )
+    private function doSearch(array $searchParams)
     {
         return $this->legacyKernel->runCallback(
-            function () use ( $searchParams )
-            {
+            function () use ($searchParams) {
                 return eZFunctionHandler::execute(
                     'ezfind',
                     'search',
