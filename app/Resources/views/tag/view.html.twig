@@ -6,9 +6,16 @@
             <div class="grid">
                 {% for post in related_content %}
                     <div class="item">
-                        {# Displaying blog_post elements calling the view line #}
-                        {{ render_esi( controller( 'ez_content:viewLocation', {'locationId': post.contentInfo.mainLocationId, 'viewType': 'line'} ) ) }}
-                    </div>
+                    {{ render(
+                                controller(
+                                    "ez_content:viewAction", {
+                                        "contentId": post.id,
+                                        "locationId": post.contentInfo.mainLocationId,
+                                        "viewType": "line"
+                                    }
+                                )
+                            ) }}
+		     </div>
                 {% endfor %}
             </div>
         </div>
