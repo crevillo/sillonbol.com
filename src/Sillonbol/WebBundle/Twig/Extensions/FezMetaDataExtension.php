@@ -66,7 +66,7 @@ class FezMetaDataExtension extends Twig_Extension
 
     public function getName()
     {
-        return 'eflweb.metadata';
+        return 'sillonbol.metadata';
     }
 
     public function getFunctions()
