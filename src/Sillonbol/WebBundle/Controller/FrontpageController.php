@@ -9,6 +9,7 @@
 namespace Sillonbol\WebBundle\Controller;
 
 use eZ\Bundle\EzPublishLegacyBundle\Controller;
+use Netgen\TagsBundle\Core\Repository\TagsService;
 use Symfony\Component\HttpFoundation\Response;
 
 class FrontpageController extends Controller
@@ -112,19 +113,19 @@ class FrontpageController extends Controller
 
         $tags = $this->getLegacyKernel()->runCallback(
             function () {
+                $tagsService = $this->get('ezpublish.api.service.tags');
                 $solr = new \eZSolr();
                 $rs = $solr->search('',
                     array(
                         'Facet' => array(
                             array(
-                                'field' => 'attr_tags_lk',
+                                'field' => 'ezf_df_tag_ids',
                                 'sort' => 'count',
                                 'limit' => 0
                             )
                         ),
                         'SearchContentClassID' => array('article', 'blog_post'),
                         'SearchLimit' => 1
-
                     )
                 );
 
@@ -132,12 +133,13 @@ class FrontpageController extends Controller
 
                 $tags = $facets[0]['countList'];
 
+                ini_set('display_errors', 1);
                 foreach ($tags as $key => $value) {
-                    $size = $minFontSize + (($value - $minCount) * $step);
+                    $size = $value;
                     $tagCloud[] = array(
                         'font_size' => $size,
                         'count' => $value,
-                        'tag' => $key
+                        'tag' => $tagsService->loadTag($key)
                     );
                 }
                 return $tagCloud;

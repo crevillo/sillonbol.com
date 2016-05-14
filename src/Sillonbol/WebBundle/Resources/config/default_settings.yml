@@ -11,3 +11,5 @@ parameters:
        - {template: content_fields.html.twig, priority: 0}
        - {template: content_fields.html.twig, priority: 0}
        - {template: eztags_content_field.html.twig, priority: 0}
+    eztags.default.tag_view.template: ':tag:view.html.twig'
+    eztags.default.tag_view.related_content_list.limit: 9

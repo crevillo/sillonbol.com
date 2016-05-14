@@ -30,5 +30,8 @@ _ezpublishLegacyRoutes:
 _ezplatformRepositoryFormsRoutes:
     resource: "@EzSystemsRepositoryFormsBundle/Resources/config/routing.yml"
 
+_netgenTagsRoutes:
+    resource: "@NetgenTagsBundle/Resources/config/routing.yml"
+
 _sillonbolRoutes:
     resource: "@SillonbolWebBundle/Resources/config/routing.yml"

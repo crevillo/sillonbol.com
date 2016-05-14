@@ -6,6 +6,8 @@ parameters:
     sillonbol.twig.extension.metadata.class: Sillonbol\WebBundle\Twig\Extensions\FezMetaDataExtension
     ezpublish.fieldType.disquscomments.class: %ezpublish.fieldType.eznull.class%
     ezpublish.fieldType.disquscomments.converter.class: %ezpublish.fieldType.eznull.converter.class%
+    eztags.pagerfanta.related_content_adapter.class: Sillonbol\WebBundle\Pagination\Pagerfanta\RelatedContentAdapter
+    sillonbol.service.tags.class: Sillonbol\WebBundle\Core\Repository\TagsService
 
 services:
     sillonbol.criteria_helper:
@@ -39,3 +41,12 @@ services:
                 - [setConnection, [@ezpublish.api.storage_engine.legacy.dbhandler]]
             tags:
                 - {name: 'twig.extension'}
+
+    sillonbol.service.tags:
+        class: '%sillonbol.service.tags.class%'
+        parent: ezpublish.api.service.tags.inner
+
+    eztags.pagerfanta.related_content_adapter:
+        class: %eztags.pagerfanta.related_content_adapter.class%
+        arguments:
+            - @sillonbol.service.tags

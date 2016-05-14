@@ -30,7 +30,7 @@ ezpublish:
             # System languages. Note that by default, content, content types, and other data are in eng-GB locale,
             # so removing eng-GB from this list may lead to errors or content not being shown, unless you change
             # all eng-GB data to other locales first.
-            languages: [eng-GB, esl-ES]
+            languages: [esl-ES, eng-GB]
 
 ez_publish_legacy:
     system:
